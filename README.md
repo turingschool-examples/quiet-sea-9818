@@ -51,7 +51,7 @@ Community Garden is an app that tracks Gardens, Plots, and Plants.
  	* Ex: number: 25, size: "Large", direction: "East"
 * Plants have a name, description, and days to harvest.
   * Ex: name: "Purple Beauty Sweet Bell Pepper", description: "Prefers rich, well draining soil.", days_to_harvest: 90
-* Gardens have many plots
+* Gardens have many Plots
 * Plots belong to a Garden
 * Plants can be in many Plots
 * Plots have many Plants
@@ -83,7 +83,7 @@ And I still see that plant's name under other plots that is was associated with.
 ```
 User Story 3, Garden's Plants
 As a visitor
-When I visit an garden's show page
+When I visit a garden's show page
 Then I see a list of plants that are included in that garden's plots
 And I see that this list is unique (no duplicate plants)
 And I see that this list only includes plants that take less than 100 days to harvest
