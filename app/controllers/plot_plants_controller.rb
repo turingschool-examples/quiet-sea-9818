@@ -1,0 +1,3 @@
+class PotPlantsController < ApplicationController
+  
+end
