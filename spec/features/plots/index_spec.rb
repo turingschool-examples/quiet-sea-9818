@@ -31,11 +31,38 @@ RSpec.describe "Plot Index page ('/plots')" do
       expect(page).to have_content(@rocky.number)
       expect(page).to have_content(@midwest.number)
       
-      within("#plot-list-#{@coast.id}") do
+      # within("#plant-list-#{@coast.id}") do
         expect(page).to have_content(@coast.number)
         expect(page).to have_content(@rose.name)
-        expect(page).to_not have_content(@tulips.name)
-      end
+        # expect(page).to_not have_content(@tulips.name)
+      # end
+    end
+  end
+
+
+  describe "Story 2-Index has Remove a Plant from a Plot" do
+    describe "I see a link to remove that plant from that plot" do
+      describe "when I click on that link I'm returned to the plots index page" do
+        it "And I no longer see that plant listed under that plot, but other plants remain" do
+          visit ('/plots')
+
+          # expect(page).to have_content(@zooplant.name)
+# save_and_open_page
+          within("#plant-list-#{@zooplant.id}") do
+            expect(page).to_not have_content(@tulips.name)
+            expect(page).to have_content(@zooplant.name)
+            expect(page).to have_content('Delete This Plant')
+         end
+    
+         within("#plant-list-#{@zooplant.id}") do
+          click_link ('Delete This Plant')
+        end
+        
+          expect(page).to_not have_content(@zooplant.name)         
+          expect(current_path).to eq(plots_path)
+
+        end
+      end 
     end
   end
 end
