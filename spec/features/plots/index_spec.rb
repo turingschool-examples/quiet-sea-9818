@@ -1,8 +1,3 @@
-# User Story 1, Plots Index Page
-# As a visitor
-# When I visit the plots index page ('/plots')
-# I see a list of all plot numbers
-# And under each plot number I see the names of all that plot's plants
 require 'rails_helper'
 
 RSpec.describe "Plots Index Page" do
@@ -49,6 +44,53 @@ RSpec.describe "Plots Index Page" do
         within("#plot-#{@plot2.id}") do
           expect(page).to have_content("Plant Name: Plant2")
           expect(page).to have_content("Plant Name: Plant4")
+        end
+      end
+
+      describe "Next to each plant's name" do
+        it "I see a link to remove that plant from that plot" do
+          visit "/plots"
+          # save_and_open_page
+
+          within("#plot-#{@plot1.id}") do
+            expect(page).to have_button("Delete Plant1")
+            expect(page).to have_button("Delete Plant3")
+          end
+
+          within("#plot-#{@plot2.id}") do
+            expect(page).to have_button("Delete Plant2")
+            expect(page).to have_button("Delete Plant4")
+          end
+        end
+
+        describe "When I click on that link" do
+          it "I'm returned to the plots index page, And I no longer see that plant listed under that plot, And I still see that plant's name under other plots that it was associated with." do
+            pp5 = PlotPlant.create!(plot: @plot1, plant: @plant4)
+
+            visit "/plots"
+            # save_and_open_page
+
+            within("#plot-#{@plot1.id}") do
+              expect(page).to have_button("Delete Plant1")
+              expect(page).to have_button("Delete Plant3")
+              expect(page).to have_button("Delete Plant4")
+              click_button("Delete Plant4")
+            end
+
+            expect(current_path).to eq("/plots")
+            # save_and_open_page
+
+            within("#plot-#{@plot1.id}") do
+              expect(page).to have_content("Plant Name: Plant1")
+              expect(page).to have_content("Plant Name: Plant3")
+              expect(page).to_not have_content("Plant Name: Plant4")
+            end
+
+            within("#plot-#{@plot2.id}") do
+              expect(page).to have_content("Plant Name: Plant2")
+              expect(page).to have_content("Plant Name: Plant4")
+            end
+          end
         end
       end
     end
