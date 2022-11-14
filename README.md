@@ -61,39 +61,39 @@ Community Garden is an app that tracks Gardens, Plots, and Plants.
 
 ```
 User Story 1, Plots Index Page
-As a visitor
-When I visit the plots index page ('/plots')
-I see a list of all plot numbers
-And under each plot number I see the names of all that plot's plants
+  As a visitor
+  When I visit the plots index page ('/plots')
+  I see a list of all plot numbers
+  And under each plot number I see the names of all that plot's plants
 ```
 
 ```
-User Story 2, Remove a Plant from a Plot
-As a visitor
-When I visit the plots index page
-Next to each plant's name
-I see a link to remove that plant from that plot
-When I click on that link
-I'm returned to the plots index page
-And I no longer see that plant listed under that plot,
-And I still see that plant's name under other plots that it was associated with.
+  User Story 2, Remove a Plant from a Plot
+    As a visitor
+    When I visit the plots index page
+    Next to each plant's name
+    I see a link to remove that plant from that plot
+    When I click on that link
+    I'm returned to the plots index page
+    And I no longer see that plant listed under that plot,
+  And I still see that plant's name under other plots that it was associated with.
 ```
 
 ```
-User Story 3, Garden's Plants
-As a visitor
-When I visit a garden's show page
-Then I see a list of plants that are included in that garden's plots
-And I see that this list is unique (no duplicate plants)
-And I see that this list only includes plants that take less than 100 days to harvest
+  User Story 3, Garden's Plants
+  As a visitor
+  When I visit a garden's show page
+  Then I see a list of plants that are included in that garden's plots
+  And I see that this list is unique (no duplicate plants)
+  And I see that this list only includes plants that take less than 100 days to harvest
 ```
 
 ## Extensions
 
 ```
-Extension,
-As a visitor
-When I visit a garden's show page,
-Then I see the list of plants is sorted by the number of plants that appear in any of that garden's plots from most to least
-(Note: you should only make 1 database query to retrieve the sorted list of plants)
+  Extension,
+  As a visitor
+  When I visit a garden's show page,
+  Then I see the list of plants is sorted by the number of plants that appear in any of that garden's plots from most to least
+  (Note: you should only make 1 database query to retrieve the sorted list of plants)
 ```
