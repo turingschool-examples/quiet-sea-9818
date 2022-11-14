@@ -77,7 +77,7 @@ I see a link to remove that plant from that plot
 When I click on that link
 I'm returned to the plots index page
 And I no longer see that plant listed under that plot,
-And I still see that plant's name under other plots that is was associated with.
+And I still see that plant's name under other plots that it was associated with.
 ```
 
 ```
