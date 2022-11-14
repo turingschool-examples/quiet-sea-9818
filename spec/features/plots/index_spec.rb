@@ -28,7 +28,6 @@ RSpec.describe 'plots index page', type: :feature do
       end
 
       it '- shows a list of all plot numbers, and under each plot lists all of that plots plants' do
-        save_and_open_page
         expect(page).to have_css("#plot-#{@plot_1.id}")
         expect(page).to have_css("#plot-#{@plot_2.id}")
         expect(page).to have_css("#plot-#{@plot_3.id}")
@@ -54,6 +53,15 @@ RSpec.describe 'plots index page', type: :feature do
           expect(page).to have_content("Summer Strawberries")
           expect(page).to_not have_content("Green Bell Peppers")
         end
+      end
+
+      it '- has a link next to each plant name to remove that plant from the plot' do
+        
+      end
+
+      it '- when I click on that link, I am redirected back to the plots index and I no longer see
+      that plant listed under that plot, and I still see that plants name under other plots' do
+
       end
     end
   end
