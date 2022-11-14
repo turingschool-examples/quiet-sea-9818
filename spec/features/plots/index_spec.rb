@@ -34,13 +34,52 @@ RSpec.describe 'Plots Index Page', type: :feature do
       PlantPlot.create!(plant: daisy, plot: plot_2)
 
       visit plots_path
-      save_and_open_page
+      
       within ("#plot-#{plot_1.id}") do
         expect(page).to have_content('My Plants:')
         expect(page).to have_content(lavender.name)
         expect(page).to have_content(rose.name)
 
         expect(page).to_not have_content(daisy.name)
+      end
+    end
+
+    it 'next to each plant name I see a link to remove that plant from the plot' do
+      PlantPlot.create!(plant: lavender, plot: plot_1)
+      PlantPlot.create!(plant: rose, plot: plot_1)
+      PlantPlot.create!(plant: daisy, plot: plot_2)
+
+      visit plots_path
+
+      within ("#plot-#{plot_1.id}") do
+        expect(page).to have_link('Delete Plant')
+      end
+    end
+
+    it 'after clicking the delete link, I am taken back to the index page where I no longer see that plant listed under that plot, but see it under other plots' do
+      PlantPlot.create!(plant: lavender, plot: plot_1)
+      PlantPlot.create!(plant: rose, plot: plot_1)
+      PlantPlot.create!(plant: daisy, plot: plot_2)
+      PlantPlot.create!(plant: lavender, plot: plot_2)
+
+      visit plots_path
+
+      within("#plot-#{plot_1.id}") do
+        expect(page).to have_content(lavender.name)
+      end
+     
+      within ("##{plot_1.id}-#{lavender.id}") do
+        click_link 'Delete Plant'
+      end
+
+      expect(current_path).to eq(plots_path)
+
+      within("#plot-#{plot_1.id}") do
+        expect(page).to_not have_content(lavender.name)
+      end
+
+      within("#plot-#{plot_2.id}") do
+        expect(page).to have_content(lavender.name)
       end
     end
   end
