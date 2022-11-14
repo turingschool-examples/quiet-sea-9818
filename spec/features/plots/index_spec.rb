@@ -16,11 +16,43 @@ RSpec.describe 'plots index page', type: :feature do
         @bananas = Plant.create!(name: "San Juan Banana Tree", description: "We don't know how they grow here either!", days_to_harvest: 45)
         @bell_peppers = Plant.create!(name: "Green Bell Peppers", description: "A Classic!", days_to_harvest: 100)
 
+        @plot_1.plants << @strawberries
+        @plot_1.plants << @plums
+        @plot_2.plants << @kale
+        @plot_2.plants << @strawberries
+        @plot_2.plants << @bell_peppers
+        @plot_3.plants << @bananas
+        @plot_3.plants << @strawberries
+
         visit plots_path
       end
 
       it '- shows a list of all plot numbers, and under each plot lists all of that plots plants' do
+        expect(page).to have_css("#plot-#{@plot_1.id}")
+        expect(page).to have_css("#plot-#{@plot_2.id}")
+        expect(page).to have_css("#plot-#{@plot_3.id}")
 
+        within "#plot-#{@plot_1.id}" do
+          expect(page).to have_content("Plants in Plot #1:")
+          expect(page).to have_content("Summer Strawberries")
+          expect(page).to have_content("Plum Tree")
+          expect(page).to_not have_content("Green Bell Peppers")
+        end
+
+        within "#plot-#{@plot_2.id}" do
+          expect(page).to have_content("Plants in Plot #2:")
+          expect(page).to have_content("Dino Kale")
+          expect(page).to have_content("Summer Strawberries")
+          expect(page).to have_content("Green Bell Peppers")
+          expect(page).to_not have_content("San Juan Banana Tree")
+        end
+
+        within "#plot-#{@plot_3.id}" do
+          expect(page).to have_content("Plants in Plot #3:")
+          expect(page).to have_content("San Juan Banana Tree")
+          expect(page).to have_content("Summer Strawberries")
+          expect(page).to_not have_content("Green Bell Peppers")
+        end
       end
     end
   end
