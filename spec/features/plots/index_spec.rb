@@ -56,10 +56,31 @@ RSpec.describe 'plots index page', type: :feature do
       end
 
       it '- has a link next to each plant name to remove that plant from the plot' do
-        
+        expect(page).to have_css("#plants-#{@plot_1.id}")  
+        expect(page).to have_css("#plants-#{@plot_2.id}")  
+        expect(page).to have_css("#plants-#{@plot_3.id}")  
+
+        within "#plants-#{@plot_1.id}" do
+          expect(page).to have_link("Remove Summer Strawberries")
+          expect(page).to have_link("Remove Plum Tree")
+          expect(page).to_not have_link("Remove Green Bell Peppers")
+        end
+
+        within "#plants-#{@plot_2.id}" do
+          expect(page).to have_link("Remove Dino Kale")
+          expect(page).to have_link("Remove Summer Strawberries")
+          expect(page).to have_link("Remove Green Bell Peppers")
+          expect(page).to_not have_content("Remove San Juan Banana Tree")
+        end
+
+        within "#plants-#{@plot_3.id}" do
+          expect(page).to have_link("Remove San Juan Banana Tree")
+          expect(page).to have_link("Remove Summer Strawberries")
+          expect(page).to_not have_link("Remove Green Bell Peppers")
+        end
       end
 
-      it '- when I click on that link, I am redirected back to the plots index and I no longer see
+      xit '- when I click on that link, I am redirected back to the plots index and I no longer see
       that plant listed under that plot, and I still see that plants name under other plots' do
 
       end
