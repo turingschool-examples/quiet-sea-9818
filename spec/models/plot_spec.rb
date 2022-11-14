@@ -6,4 +6,19 @@ RSpec.describe Plot do
     it { should have_many :plant_plots }
     it { should have_many(:plants).through(:plant_plots) }
   end
+
+  before(:each) do
+    garden_1 = Garden.create(name: "Garden1", organic: true)
+    @plot_1 = garden_1.plots.create(number: 1, size: 'small', direction: 'north')
+    @plant_1 = @plot_1.plants.create(name: 'plant1', description: 'a plant', days_to_harvest: 99)
+    @plant_2 = @plot_1.plants.create(name: 'plant2', description: 'also here', days_to_harvest: 1)
+  end
+
+  describe 'instance methods' do
+    describe '#plants_name' do
+      it 'returns array of plant names in the given plot' do
+        expect(@plot_1.plants_name).to eq([@plant_1.name, @plant_2.name])
+      end
+    end
+  end
 end
