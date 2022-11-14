@@ -24,18 +24,17 @@ RSpec.describe "Plots Index Page" do
 
   it "under each plot number I see the name o fall the plot's plants" do
     visit '/plots'
-    expect(page).to have_content("Plant: #{@plant_1.name}")
-    expect(page).to have_content("Plant: #{@plant_2.name}")
-    expect(page).to have_content("Plant: #{@plant_3.name}")
+    expect(page).to have_content("Plants- #{@plant_1.name}")
+    expect(page).to have_content("Plants- #{@plant_2.name}")
+    expect(page).to have_content("Plants- #{@plant_3.name}")
   end
 
   it "sees a link to remove plant from plot" do
     visit '/plots'
-    expect(page).to have_content(@plant_1.name)
-    click_link "Remove #{@plant_1.name}"
-    expect(current_path).to eq("/plots")
-    expect(page).to_not have_content(@plant_1.name)
-    click_link "Remove #{@plant_2.name}"
-    expect(page).to_not have_content(@plant_2.name)
+    within "#plants-#{@plant_1.id}" do
+      expect(page).to have_content(@plant_1.name)
+      click_link "Remove #{@plant_1.name}"
+      expect(current_path).to eq("/plots")
+    end
   end
 end
