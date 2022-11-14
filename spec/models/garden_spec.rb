@@ -47,7 +47,9 @@ RSpec.describe Garden do
       #   expect(@garden_1.plants_under_100_days.length).to eq(5)
       # end
 
-      it "sorts the list of plants based on their count" do
+      #Above test is no longer compatible after adding in the extension. Kept it to demonstrate work done.
+
+      it "returns a sorted -based on count - hash of plant names as keys and counts as values" do
         expect(@garden_1.plants_under_100_days).to eq({"Lily"=>5, "Dahlia"=>4, "Daisy"=>3, "Apricot"=>2, "Birch"=>1})
       end
     end
