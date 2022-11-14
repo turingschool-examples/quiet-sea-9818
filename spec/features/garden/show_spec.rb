@@ -36,9 +36,10 @@ RSpec.describe "Garden Show Page", type: :feature do
   it "has a list of plants that are included in that garden's plots and the list is unique and only includes plants that
     take less than 100 days to harvest" do
       visit garden_path(@garden_1.id)
-      
+save_and_open_page
       expect(page).to have_content(@plant_2.name, count: 1)
       expect(page).to have_content(@plant_3.name, count: 1)
       expect(page).to have_content(@plant_4.name, count: 1)
+      expect(page).to have_no_content(@plant_5.name)
     end
 end 

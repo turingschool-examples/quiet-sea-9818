@@ -71,11 +71,12 @@ RSpec.describe "Plot Index Page", type: :feature do
 
   it "has a link next to each plan's name to remove the plant from that plot" do
     visit plots_path
-
+    
     within("#plot-#{@plot_1.id}") do
       expect(page).to have_link "Remove #{@plant_1.name}"
       expect(page).to have_link "Remove #{@plant_2.name}"
       expect(page).to have_link "Remove #{@plant_3.name}"
+      expect(page).to have_no_link "Remove #{@plant_4.name}"
     end
   end
 

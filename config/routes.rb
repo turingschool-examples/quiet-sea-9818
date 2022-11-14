@@ -5,10 +5,5 @@ Rails.application.routes.draw do
   resources :plots, only: :index do
     resources :plot_plants, only: :destroy, shallow: true
   end
-
-
-
-
-
 end
 
