@@ -3,7 +3,8 @@
 <div id = "plot-<%=plot.id%>">
 <h2><strong>Plot Number: <%=plot.number%></strong></h2>
   Plants in Plot <%=plot.number%>: <%plot.plants.each do |plant|%>
-    <p><%=link_to plant.name, "plots/#{plot.id}/plants/#{plant.id}", method: :delete %></p>
+     <p><%=plant.name%></p> 
+    <p><%=button_to "Delete #{plant.name}", "plots/#{plot.id}/plants/#{plant.id}", method: :delete %></p>
   <%end%>
 </div>  
 <%end%>

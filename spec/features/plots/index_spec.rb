@@ -28,7 +28,6 @@ RSpec.describe 'plots index page' do
         expect(page).to have_content("Lily")
         expect(page).to have_content("Tree")
         expect(page).to_not have_content("Venus Flytrap")
-        save_and_open_page
       end
 
       within "#plot-#{@plot2.id}" do 
@@ -43,12 +42,15 @@ RSpec.describe 'plots index page' do
     it 'has a link to delete each plant from a plot' do 
       visit plots_path
       within "#plot-#{@plot1.id}" do 
-        expect(page).to have_link("Lily")
+        expect(page).to have_button("Lily")
         expect(page).to have_content("Tree")
-        click_link "Lily"
+        save_and_open_page
+
+        click_button "Lily"
         expect(current_path).to eq(plots_path)
         expect(page).to_not have_content("Lily")
         expect(page).to have_content("Tree")
+
       end
 
     end
