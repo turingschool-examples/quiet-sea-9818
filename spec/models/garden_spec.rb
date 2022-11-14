@@ -25,7 +25,8 @@ RSpec.describe Garden do
 
   describe '#less_than_100' do
     it "returns all plants with harvest days is less than 100" do
-      expect(@garden1.less_than_100).to eq([@plant2, @plant1])
+      expect(@garden1.less_than_100.first).to eq(@plant1)
+      expect(@garden1.less_than_100.last).to eq(@plant2)
     end
   end 
 end
