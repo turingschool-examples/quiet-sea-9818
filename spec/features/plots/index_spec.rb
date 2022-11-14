@@ -24,35 +24,33 @@ RSpec.describe 'the plots index page' do
   end
   
   it 'lists all of the plot numbers' do
-    within "#all_plots" do
-      expect(page).to have_content(@plot1.number)
-      expect(page).to have_content(@plot2.number)
-      expect(page).to have_content(@plot3.number)
-      expect(page).to have_content(@plot4.number)
-    end
+    expect(page).to have_content(@plot1.number)
+    expect(page).to have_content(@plot2.number)
+    expect(page).to have_content(@plot3.number)
+    expect(page).to have_content(@plot4.number)
   end
 
   it 'displays all plants names associated with each plot' do
-    within "plot_plants_#{@plot1.id}" do
+    within "#plot_plants_#{@plot1.id}" do
       expect(page).to have_content(@potato.name)
       expect(page).to have_content(@kale.name)
       expect(page).to_not have_content(@pepper.name)
     end
 
-    within "plot_plants_#{@plot2.id}" do
+    within "#plot_plants_#{@plot2.id}" do
       expect(page).to have_content(@pepper.name)
       expect(page).to_not have_content(@potato.name)
       expect(page).to_not have_content(@kale.name)
     end
 
-    within "plot_plants_#{@plot3.id}" do
+    within "#plot_plants_#{@plot3.id}" do
       expect(page).to have_content(@squash.name)
       expect(page).to have_content(@kale.name)
       expect(page).to_not have_content(@pepper.name)
       expect(page).to_not have_content(@tomato.name)
     end
 
-    within "plot_plants_#{@plot4.id}" do
+    within "#plot_plants_#{@plot4.id}" do
       expect(page).to have_content(@pepper.name)
       expect(page).to have_content(@tomato.name)
       expect(page).to_not have_content(@squash.name)
