@@ -1,7 +1,5 @@
 <%= @garden.name %>
 
-<%@garden.plots.each do |plot|%>
-  <% plot.less_than_100.each do|plant|%>
-    <p><%= plant.name %></p>
-  <% end %>
+<%@garden.less_than_100.each do |plant|%>
+  <p><%= plant.name %></p>
 <% end %>

@@ -15,7 +15,7 @@ RSpec.describe 'garden show page' do
     @plot_plants1 = PlotPlant.create!(plant_id: @plant1.id, plot_id: @plot1.id)
     @plot_plants2 = PlotPlant.create!(plant_id: @plant2.id, plot_id: @plot2.id)
     @plot_plants3 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
-    @plot_plants4 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
+    @plot_plants4 = PlotPlant.create!(plant_id: @plant1.id, plot_id: @plot2.id)
    
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'garden show page' do
       visit garden_path(@garden1)
 
       expect(page).to have_content(@garden1.name)
-      expect(page).to have_content(@plant1.name)
+      expect(page).to have_content(@plant1.name, count: 1)
       expect(page).to have_content(@plant2.name)
       expect(page).to_not have_content(@plant3.name)
     end

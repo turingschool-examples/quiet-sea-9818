@@ -24,7 +24,7 @@ RSpec.describe Plot do
     @plot_plants4 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
    
   end
-# And I see that this list only includes plants that take less than 100 days to harvest
+
   describe '#less_than_100' do
     it 'returns plants that take less than 100 days to harvest' do
       expect(@plot1.less_than_100).to eq([@plant1])
