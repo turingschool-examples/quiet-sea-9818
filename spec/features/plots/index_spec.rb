@@ -12,6 +12,7 @@ RSpec.describe "Plots Index Page" do
     @plot_plant_1 = PlotPlant.create(plot: @plot_1, plant: @plant_1)
     @plot_plant_2 = PlotPlant.create(plot: @plot_2, plant: @plant_2)
     @plot_plant_3 = PlotPlant.create(plot: @plot_3, plant: @plant_3)
+    # @plot_plant_4 = PlotPlant.create(plot: @plot_3, plant: @plant_1)
   end
 
   it "sees a list of all plot numbers" do
