@@ -74,6 +74,5 @@ RSpec.describe 'the plots index page' do
     within "#plot_plants_#{@plot4.id}" do
       expect(page).to have_link("Remove")
     end
-    save_and_open_page
   end
 end
