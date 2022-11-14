@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Garden do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plot_plants).through(:plots) }
-    it { should have_many(:plants).through(:plot_plants) }
-  end
+RSpec.describe 'Garden Show' do
   
   before :each do
     @eden = Garden.create(name:"Eden", organic: true)
@@ -21,17 +16,22 @@ RSpec.describe Garden do
     
     @plot1.plants << @tomato
     @plot1.plants << @zucchini
-    @plot1.plants << @squash
     @plot2.plants << @squash
     @plot2.plants << @tomato
     @secret_garden_plot.plants << @squash
+    
+    visit "/gardens/#{@eden.id}"
   end
   
-  describe 'instance methods' do
-    describe '#unique_plants_under_100' do
-      it "returns a list of unique plants where the days_to_harvest is less
-      than 100" do
-        expect(@eden.unique_plants_under_100).to eq([@zucchini, @squash])
+  describe 'as a visitor' do
+    it "I see a list of plants that are included in that garden's plots. I see
+    that this list is unique (no duplicate plants), And I see that this list
+    only includes plants that take less than 100 days to harvest" do
+      within("#garden-plants") do
+        expect(page).to have_content(@zucchini.name)
+        expect(page).to have_content(@squash.name)
+        expect(page).to_not have_content(@tomato.name)
+        expect(page).to_not have_content(@potatoes.name)
       end
     end
   end
