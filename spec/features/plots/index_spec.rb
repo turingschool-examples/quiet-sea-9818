@@ -8,6 +8,7 @@ RSpec.describe 'plot index page' do
   let!(:plant2) { Plant.create!(name: 'Kryptonian Tomato', description: 'Tastes like radiation', days_to_harvest: 80) }
   let!(:plant3) { Plant.create!(name: 'Banana', description: 'Probably a vegetable', days_to_harvest: 15) }
   let!(:plant4) { Plant.create!(name: 'Yarrow Flower', description: 'For Migo', days_to_harvest: 180) }
+  let!(:plant5) { Plant.create!(name: 'Blueberries', description: 'Also a vegetable', days_to_harvest: 99) }
 
   let!(:plot1) { garden1.plots.create!(number: 4, size: 'Medium', direction: 'West') }
   let!(:plot2) { garden1.plots.create!(number: 15, size: 'Small', direction: 'West') }
@@ -22,6 +23,7 @@ RSpec.describe 'plot index page' do
   let!(:plant_plot3) { PlantPlot.create!(plant_id: plant2.id, plot_id: plot1.id) }
   let!(:plant_plot4) { PlantPlot.create!(plant_id: plant3.id, plot_id: plot7.id) }
   let!(:plant_plot5) { PlantPlot.create!(plant_id: plant4.id, plot_id: plot5.id) }
+  let!(:plant_plot6) { PlantPlot.create!(plant_id: plant5.id, plot_id: plot4.id) }
 
   before :each do
     visit plots_path

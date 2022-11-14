@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Garden, type: :model do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plants).through(:plots) }
-  end
-
+RSpec.describe 'garden show page' do
   let!(:garden1) { Garden.create!(name: 'Bat World', organic: true) }
   let!(:garden2) { Garden.create!(name: 'Krytpon', organic: false) }
 
@@ -30,10 +25,22 @@ RSpec.describe Garden, type: :model do
   let!(:plant_plot5) { PlantPlot.create!(plant_id: plant4.id, plot_id: plot5.id) }
   let!(:plant_plot6) { PlantPlot.create!(plant_id: plant5.id, plot_id: plot4.id) }
 
-  describe 'instance methods' do
-    it 'can return unique list of plants in all plots with harvest times under 100 days' do
-      expect(garden1.short_harvest_plants).to eq([plant1, plant2, plant5])
-      expect(garden2.short_harvest_plants).to eq([plant3])
+  before :each do
+    visit garden_path(garden1)
+  end
+
+  describe 'when I visit a garden show page' do
+    it 'goes to the garden show page' do
+      expect(current_path).to eq(garden_path(garden1))
+    end
+    it 'has a list of all plants in that gardens plots that take less than 100 days to harvest with no duplicates' do
+      within '#garden_plants' do
+        expect(page).to have_content("#{plant1.name} - Days to harvest: #{plant1.days_to_harvest}")
+        expect(page).to have_content("#{plant2.name} - Days to harvest: #{plant2.days_to_harvest}")
+        expect(page).to have_content("#{plant5.name} - Days to harvest: #{plant5.days_to_harvest}")
+        expect(page).to_not have_content("#{plant3.name}")
+        expect(page).to_not have_content("#{plant4.name}")
+      end
     end
   end
 end
