@@ -22,10 +22,12 @@ RSpec.describe 'garden index page' do
     PlotPlant.create!(plot: @plot_1, plant: @plant_2)
     PlotPlant.create!(plot: @plot_1, plant: @plant_3)
 
+    PlotPlant.create!(plot: @plot_2, plant: @plant_3)
     PlotPlant.create!(plot: @plot_2, plant: @plant_4)
     PlotPlant.create!(plot: @plot_2, plant: @plant_5)
 
     PlotPlant.create!(plot: @plot_3, plant: @plant_1)
+    PlotPlant.create!(plot: @plot_3, plant: @plant_3)
 
     PlotPlant.create!(plot: @plot_4, plant: @plant_5)
     PlotPlant.create!(plot: @plot_4, plant: @plant_6)
@@ -42,4 +44,12 @@ RSpec.describe 'garden index page' do
     expect(page).to have_content(@plant_3.name, count: 1)
     expect(page).to have_content(@plant_4.name, count: 1)
   end
+
+  # it 'sorts the plants in order of most appearance in plots to least' do
+  #   visit garden_path(@garden_1)
+
+  #   expect(@plant_3.name).to appear_before(@plant_1.name)
+  #   expect(@plant_1.name).to appear_before(@plant_2.name)
+  #   expect(@plant_2.name).to appear_before(@plant_4.name)
+  # end
 end

@@ -32,10 +32,12 @@ RSpec.describe Garden do
     PlotPlant.create!(plot: @plot_1, plant: @plant_2)
     PlotPlant.create!(plot: @plot_1, plant: @plant_3)
 
+    PlotPlant.create!(plot: @plot_2, plant: @plant_3)
     PlotPlant.create!(plot: @plot_2, plant: @plant_4)
     PlotPlant.create!(plot: @plot_2, plant: @plant_5)
 
     PlotPlant.create!(plot: @plot_3, plant: @plant_1)
+    PlotPlant.create!(plot: @plot_3, plant: @plant_3)
 
     PlotPlant.create!(plot: @plot_4, plant: @plant_5)
     PlotPlant.create!(plot: @plot_4, plant: @plant_6)
@@ -51,4 +53,12 @@ RSpec.describe Garden do
       end
     end
   end
+
+  # xdescribe 'class methods' do
+  #   describe '#order_garden_plants' do
+  #     it 'orders list of garden plants by number of occurences in plots' do
+  #       expect(@garden_1.list_garden_plants.order_garden_plants).to eq([@plant_3, @plant_1, @plant_2, @plant_4])
+  #     end
+  #   end
+  # end
 end

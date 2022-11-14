@@ -10,4 +10,9 @@ class Garden < ApplicationRecord
       .where('days_to_harvest < 100')
       .distinct
   end
+
+  # def self.order_garden_plants
+  #   select("plot_plants.*, count('plot_plants.plant_id') as plant_count")
+  #   .order('plant_count')
+  # end
 end
