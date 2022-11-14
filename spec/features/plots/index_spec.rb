@@ -78,11 +78,11 @@ RSpec.describe 'the plots index page' do
 
   it 'can remove a plot plant and still see the same plant associated with other plots' do
     within "#plot_plants_#{@plot2.id}" do
-      first(:link, 'Remove').click_link('Remove')
+      click_link('Remove')
     end
 
     expect(current_path).to eq(plots_path)
-    
+
     within "#plot_plants_#{@plot2.id}" do
       expect(page).to_not have_content(@pepper.name)
     end

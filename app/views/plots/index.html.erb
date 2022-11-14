@@ -4,8 +4,8 @@
 <% @plots.each do |plot| %>
   <p>Plot #<%= plot.number %></p>
     <ul id="plot_plants_<%= plot.id %>">
-    <% plot.plants.each do |plant| %>
-      <li><%= plant.name %> <%= link_to "Remove", plot_plant_path(plot.id, plant.id), method: :delete %>
+    <% plot.plot_plants.each do |plot_plant| %>
+      <li><%= plot_plant.plant_name %> <%= link_to "Remove", plot_plant_path(plot_plant.id), method: :delete %>
     <% end %>
     </ul>
 <% end %>
