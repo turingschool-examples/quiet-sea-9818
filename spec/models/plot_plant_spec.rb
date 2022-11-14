@@ -34,11 +34,11 @@ RSpec.describe PlotPlant do
     @pp_8 = PlotPlant.create!(plot: @plot_4, plant: @plant_6)
   end
 
-  # describe 'class methods' do
-  #   describe '#find_plot_plant' do
-  #     it 'finds a plot_plant' do
-  #       expect(PlotPlant.find_plot_plant(@plot_1, @plant_1)).to eq(@pp_1)
-  #     end
-  #   end
-  # end
+  describe 'class methods' do
+    describe '#find_plot_plant' do
+      it 'finds a plot_plant' do
+        expect(PlotPlant.find_plot_plant(@plant_1, @plot_1)).to eq(@pp_1)
+      end
+    end
+  end
 end
