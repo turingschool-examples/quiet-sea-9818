@@ -22,11 +22,10 @@ RSpec.describe 'Plots Index Page' do
     it 'I see a list of all plot numbers' do 
       expect(page).to have_content(@plot1.number)
       expect(page).to have_content(@plot2.number)
-      save_and_open_page
+      # save_and_open_page
     end
 
-    it 'And under each plot number I see the names of all that plots plants' do 
-      visit "/plots"
+    it 'And under each plot number I see the names of all that plots plants' do
       expect(page).to have_content(@plant1.name)
       expect(page).to have_content(@plant2.name)
       expect(page).to have_content(@plant3.name)
@@ -34,6 +33,13 @@ RSpec.describe 'Plots Index Page' do
       expect(page).to have_content(@plant5.name)
       expect(page).to have_content(@plant6.name)
     end
-  end
 
+    it 'i see a link to remove that plant from the plot' do 
+      expect(page).to have_link("Delete #{@plant1.name}")
+
+      click_link "Delete #{@plant1.name}"
+      expect(current_path).to eq("/plots")
+      save_and_open_page
+    end
+  end 
 end

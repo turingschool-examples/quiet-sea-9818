@@ -3,10 +3,10 @@
 <% @plots.each do |plot| %>
   <p>Plot Number: <%= plot.number %></p>
 <h2>PLANTS</h2>
-<% plot.plants.each do |plant| %>
-<%= plant.name %>
-<% end %> 
+  <% plot.plants.each do |plant| %>
+    <%= plant.name %>
+    <%= link_to "Delete #{plant.name}", "/plots/#{plot.id}/plants/#{plant.id}/destroy" %>
+  <% end %> 
 <% end %>
-#i really dont understand why this is returning plants as undefined method. 
 
 

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   # resources :plots
 
   get "/plots", to: "plots#index"
+  get "/plots/:id/plants/:id/destroy", to: "plot_plants#destroy"
 end
