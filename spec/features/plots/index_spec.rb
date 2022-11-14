@@ -33,9 +33,11 @@ require 'rails_helper'
       it 'Under each plot number I see the names of all the plots plants' do 
 
         visit plots_path
-        within"plots-#{@plot1.id}" do 
+
+        within "#plot-#{@plot1.number}" do 
         expect(page).to have_content(@plant1.name)
         expect(page).to have_content(@plant2.name)
+        expect(page).to_not have_content(@plant3.name)
         end 
       end
     end
