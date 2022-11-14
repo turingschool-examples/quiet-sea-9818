@@ -57,10 +57,16 @@ RSpec.describe("Plots Index Page") do
         end
       end
 
-      it 'I no longer see the removed plant under that plot' do
+      it 'the plant is removed from only that plot' do
+        @plot_2.plants << @plant_3
+
         within "#plot-number-#{@plot_3.id}" do
           click_link("Remove")
           expect(page).to_not have_content(@plant_3.name)
+        end
+
+        within "#plot-number-#{@plot_2.id}" do
+          expect(page).to have_content(@plant_3.name)
         end
       end
     end
