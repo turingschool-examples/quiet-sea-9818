@@ -6,7 +6,7 @@ RSpec.describe "Garden's Show Page" do
     @plot_1 = @garden_1.plots.create!(number: 25, size: "Large", direction: "East")
     @plot_2 = @garden_1.plots.create!(number: 26, size: "Medium", direction: "North")
     @plot_3 = @garden_1.plots.create!(number: 27, size: "Small", direction: "West")
-    @plant_1 = Plant.create!(name: "Purple Beauty Sweet Bell Pepper", description: "Prefer Rich", days_to_harvest: 90)
+    @plant_1 = Plant.create!(name: "Purple Beauty Sweet Bell Pepper", description: "Prefer Rich", days_to_harvest: 100)
     @plant_2 = Plant.create!(name: "Red Beauty", description: "Prefer Poor", days_to_harvest: 30)
     @plant_3 = Plant.create!(name: "Blue Beauty", description: "Prefer Average", days_to_harvest: 45)
     @plot_plant_1 = PlotPlant.create(plot: @plot_1, plant: @plant_1)
@@ -18,6 +18,9 @@ RSpec.describe "Garden's Show Page" do
 
   it "a list of plants that are included in that garden's plot" do
     visit "/gardens/#{@garden_1.id}"
-    expect(page).to have_content([])
+    expect(page).to have_content("Garden's Show Page")
+    expect(page).to have_content("Plant: #{@plant_2.name}")
+    expect(page).to have_content("Plant: #{@plant_3.name}")
+    expect(page).to_not have_content("Plant: #{@plant_1.name}")
   end
 end

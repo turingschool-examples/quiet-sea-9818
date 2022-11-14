@@ -1,3 +1,5 @@
-<% @garden.plants.each do |plant| %>
-  <%= plant.name %>
+<h1>Garden's Show Page</h1>
+
+<% @garden.show_unique.each do |plant| %>
+  <p>Plant: <%= plant.name %></p>
 <% end %>

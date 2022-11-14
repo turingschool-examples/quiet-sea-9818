@@ -5,4 +5,5 @@ class Garden < ApplicationRecord
   def show_unique
     plants.where("days_to_harvest < 100").distinct
   end
+
 end
