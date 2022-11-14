@@ -2,11 +2,13 @@
 
 <% @plots.each do |plot| %>
   <div id="plot-<%= plot.id %>">
-  <b>Plants in Plot #<%= plot.number %>:</b>
-  <% plot.plants.each do |plant| %>
-    <ul>
-    <li><%= plant.name %>
-    </ul>
-  <% end %>
+    <b>Plants in Plot #<%= plot.number %>:</b>
+    <div id="plants-<%= plot.id %>">
+    <% plot.plants.each do |plant| %>
+      <ul>
+      <li><%= plant.name %> | <%= link_to "Remove #{plant.name}", plant_plot_path(plant, plot), method: :destroy %>
+      </ul>
+    <% end %>
+    </div>
   </div>
 <% end %>
