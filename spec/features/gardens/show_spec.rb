@@ -28,6 +28,7 @@ RSpec.describe "the Garden Show page" do
       expect(page).to have_content("List of Plants Which Take Under 100 Days To Harvest:")
       expect("Hibiscus").to appear_before("Vine Hops")
       expect("Vine Hops").to appear_before("Desert Sage")
+      expect(page).to_not have_content("Corn")
     end
   end
 end
