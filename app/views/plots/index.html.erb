@@ -4,6 +4,7 @@
     <p>Plot: <%= plot.number %> </p>
     <p>Plants: <% plot.plants.each do |plant| %>
     <%= "#{plant.name}" %>,    <%= "#{plant.description}" %>,     <%= "#{plant.days_to_harvest}" %></p>
+    <%= button_to "Remove #{plant.name}", plot_plant_path(plant.id), method: 'delete' %>
   <% end %>
 </div>
 <% end %>
