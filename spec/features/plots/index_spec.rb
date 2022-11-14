@@ -36,6 +36,7 @@ RSpec.describe "Plots Index Page" do
       expect(page).to have_content(@plant_1.name)
       click_link "Remove #{@plant_1.name}"
       expect(current_path).to eq("/plots")
+      # expect(page).to_not have_content(@plant_1.name)
     end
   end
 end
