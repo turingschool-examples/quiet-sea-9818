@@ -1,12 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Plot do
-  describe 'relationships' do
-    it { should belong_to(:garden) }
-    it { should have_many(:plot_plants)}
-    it { should have_many(:plants).through(:plot_plants)}
-  end
-
+RSpec.describe "destroying a plant" do
   before :each do
     @garden1 = Garden.create!(name: "fun garden", organic: true)
     
@@ -16,18 +10,28 @@ RSpec.describe Plot do
     
     @plant1 = Plant.create!(name: "daisy", description: "flower", days_to_harvest: 3)
     @plant2 = Plant.create!(name: "green beans", description: "edible", days_to_harvest: 33)
-    @plant3 = Plant.create!(name: "potatoe", description: "edible", days_to_harvest: 111)
+    @plant3 = Plant.create!(name: "potatoe", description: "edible", days_to_harvest: 11)
 
     @plot_plants1 = PlotPlant.create!(plant_id: @plant1.id, plot_id: @plot1.id)
     @plot_plants2 = PlotPlant.create!(plant_id: @plant2.id, plot_id: @plot2.id)
     @plot_plants3 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
-    @plot_plants4 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
-   
+    # @plot_plants4 = PlotPlant.create!(plant_id: @plant1.id, plot_id: @plot2.id)
   end
-# And I see that this list only includes plants that take less than 100 days to harvest
-  describe '#less_than_100' do
-    it 'returns plants that take less than 100 days to harvest' do
-      expect(@plot1.less_than_100).to eq([@plant1])
+  describe 'when I visit the plots index page' do
+    it 'will click on link return to plots index page and not see that plant listed' do
+      visit plots_path
+      
+      # save_and_open_page
+      click_on("Remove #{@plant1.name}")
+      expect(page).to_not have_content("#{@plant1.name}")
     end
   end
 end
+# As a visitor
+# When I visit the plots index page
+# Next to each plant's name
+# I see a link to remove that plant from that plot
+# When I click on that link
+# I'm returned to the plots index page
+# And I no longer see that plant listed under that plot,
+# And I still see that plant's name under other plots that it was associated with.

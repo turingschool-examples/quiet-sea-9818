@@ -1,12 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Plot do
-  describe 'relationships' do
-    it { should belong_to(:garden) }
-    it { should have_many(:plot_plants)}
-    it { should have_many(:plants).through(:plot_plants)}
-  end
-
+RSpec.describe 'garden show page' do
   before :each do
     @garden1 = Garden.create!(name: "fun garden", organic: true)
     
@@ -24,10 +18,24 @@ RSpec.describe Plot do
     @plot_plants4 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
    
   end
-# And I see that this list only includes plants that take less than 100 days to harvest
-  describe '#less_than_100' do
-    it 'returns plants that take less than 100 days to harvest' do
-      expect(@plot1.less_than_100).to eq([@plant1])
+
+  describe 'as a visitor' do
+    it 'i see a list of plants that are included in this garden' do
+      visit garden_path(@garden1)
+
+      expect(page).to have_content(@garden1.name)
+      expect(page).to have_content(@plant1.name)
+      expect(page).to have_content(@plant2.name)
+      expect(page).to_not have_content(@plant3.name)
     end
   end
 end
+
+
+
+# User Story 3, Garden's Plants
+# As a visitor
+# When I visit a garden's show page
+# Then I see a list of plants that are included in that garden's plots
+# And I see that this list is unique (no duplicate plants)
+# And I see that this list only includes plants that take less than 100 days to harvest
