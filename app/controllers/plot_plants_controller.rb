@@ -1,6 +1,7 @@
 class PlotPlantsController < ApplicationController
   def destroy
-    plot_plant = PlotPlant.find_plot_plant(params[:plot_id], params[:plant_id])[0]
+    # require "pry"; binding.pry
+    plot_plant = PlotPlant.find_plot_plant(params[:plot_id], params[:id])[0]
     plot_plant.destroy
     redirect_to plots_path
   end
