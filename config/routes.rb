@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
-  resources :plots do
-    resources :plot_plants, shallow: true
-    resources :plants
+  resources :gardens, only: :show
+
+  resources :plots, only: :index do
+    resources :plot_plants, only: :destroy, shallow: true
   end
 
 

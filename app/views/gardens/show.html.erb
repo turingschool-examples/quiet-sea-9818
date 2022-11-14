@@ -1,0 +1,8 @@
+<h1><%= @garden.name %> Show Page </h1>
+
+<h3>Unique Plant List</h3>
+<% @garden.unique_plants.each do |plant| %>
+    <li>
+    Plant Name: <%= plant.name %>
+    </li>
+<% end %>

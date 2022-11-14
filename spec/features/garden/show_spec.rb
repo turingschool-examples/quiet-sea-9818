@@ -1,9 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Garden do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-  end
+RSpec.describe "Garden Show Page", type: :feature do
 
   before(:each) do
     @garden_1 = Garden.create!(name: "Blonde Dog Farm", organic: true)
@@ -36,9 +33,12 @@ RSpec.describe Garden do
     @plot_plant_6 = PlotPlant.create!(plot_id: @plot_3.id, plant_id: @plant_4.id)
   end
 
-  describe "#unique_plants" do
-    it "should return a unique plant list that a garden has" do
-      expect(@garden_1.unique_plants).to eq([@plant_2, @plant_3, @plant_4])
+  it "has a list of plants that are included in that garden's plots and the list is unique and only includes plants that
+    take less than 100 days to harvest" do
+      visit garden_path(@garden_1.id)
+      
+      expect(page).to have_content(@plant_2.name, count: 1)
+      expect(page).to have_content(@plant_3.name, count: 1)
+      expect(page).to have_content(@plant_4.name, count: 1)
     end
-  end
-end
+end 
