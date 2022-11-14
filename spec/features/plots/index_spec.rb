@@ -45,11 +45,15 @@ RSpec.describe 'the plots index page' do
   end
   it "has a link next to each plant to remove that plant from the plot" do
     visit plots_path
+
     within "#plot#{@plot1.id}" do
       expect(page).to have_link("Remove #{@plant1.name}")
       click_link "Remove #{@plant1.name}"
       # save_and_open_page
       expect(page).to_not have_content(@plant1.name)
+    end
+    within "#plot#{@plot2.id}" do
+      expect(page).to have_link("Remove #{@plant2.name}")
     end
     within "#plot#{@plot3.id}" do
       expect(page).to have_link("Remove #{@plant3.name}")
@@ -58,6 +62,9 @@ RSpec.describe 'the plots index page' do
       # save_and_open_page
       expect(page).to_not have_content(@plant3.name)
       expect(page).to have_content(@plant5.name)
+    end
+    within "#plot#{@plot4.id}" do
+      expect(page).to have_link("Remove #{@plant4.name}")
     end
   end
 end
