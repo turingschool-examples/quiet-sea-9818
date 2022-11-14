@@ -1,0 +1,22 @@
+<h1>ALL PLOTS REGARDLESS OF GARDEN</h1>
+<% @plots.each do |plot| %>
+  <div>
+  <%= plot.garden.name %>
+  <%= plot.garden.id %>
+  <p><%= plot.size %></p>
+  <p><%= plot.direction %></p>
+    <p><%= plot.number %></p>
+    <table class="table">
+      <tr>
+        <th>plant_name</th>
+        <th> </th>
+      </tr>
+    <% plot.plants.each do |plant| %>
+      <tr>
+      <td><%= plant.name %></td>
+        <td><%= link_to "remove #{plant.name}", garden_plot_plant_path(plot.garden.id, plot.id, plant.id), data: { confirm: 'Are you really ready to say goodbye to this happy little sprout?'}, method: :delete %> </td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+<% end %>
