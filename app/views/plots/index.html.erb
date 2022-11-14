@@ -3,7 +3,9 @@
 <% @plots.each do |plot| %>
   <h2> <%= "Plot Number: #{plot.number}" %></h2>
   <h3> <%= "Plot #{plot.number} Plants:" %></h3>
+  <div id=<%= "Plot-#{plot.number}-Plants" %>>
     <% plot.plants.each do |plant| %>
-      <p> <%= "#{plant.name}" %></p>
+      <p> <div style="float: left; width: auto;"> <%= "#{plant.name}" %></div> <%= button_to "Remove #{plant.name}", "/plots/#{plot.id}/plants/#{plant.id}", method: :delete %> </p>
     <% end %>
+  </div>
 <% end %>
