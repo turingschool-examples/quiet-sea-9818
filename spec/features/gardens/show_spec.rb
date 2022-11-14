@@ -25,7 +25,8 @@ RSpec.describe 'Gardens' do
   describe '#show' do
     it 'has a list of plants in the garden plots' do
       visit "/gardens/#{@garden1.id}"
-      expect(page).to have_content("plot number: 25")
+      expect(page).to have_content("shared plant")
+      expect(page).not_to have_content("Green Beans")
     end
 
   end

@@ -43,10 +43,10 @@ RSpec.describe 'Plots' do
       expect(page).to have_link("remove #{@plant4.name}")
       expect(page).to have_link("remove #{@plant5.name}")
       expect(page).to have_link("remove #{@plant6.name}")
-      click_link "remove #{@shared_plant.name}"
-      within "#deleted_plant" do
-        expect(page).not_to have_content(@shared_plant.name)
-      end
+      expect(page).to have_link("remove #{@shared_plant.name}", count: 2)
+      first(:link, "remove #{@shared_plant.name}").click
+      expect(current_path).to eq("/plots")
+      expect(page).to have_link("remove #{@shared_plant.name}", count: 1)
     end
   end
 
@@ -71,8 +71,10 @@ RSpec.describe 'Plots' do
       expect(page).to have_link("remove #{@plant4.name}")
       expect(page).to have_link("remove #{@plant5.name}")
       expect(page).to have_link("remove #{@plant6.name}")
-      click_link "remove #{@plant1.name}"
-      expect(page).not_to have_content(@plant1.name)
+      expect(page).to have_link("remove #{@shared_plant.name}", count: 2)
+      first(:link, "remove #{@shared_plant.name}").click
+      expect(current_path).to eq("/plots")
+      expect(page).to have_link("remove #{@shared_plant.name}", count: 1)
     end
 
 
