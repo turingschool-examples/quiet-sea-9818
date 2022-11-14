@@ -34,4 +34,22 @@ RSpec.describe 'the plots index' do
       expect(page).to_not have_content(@plant2.name)
     end
   end
+
+  it 'has buttons to remove each plant' do 
+    within "#plot-#{@plot1.id}" do 
+      expect(page).to have_content(@plant1.name)
+      within "#plant-#{@plant1.id}" do 
+        click_button "Delete"
+      end
+    end
+
+    expect(current_path).to eq(plots_path)
+    
+    within "#plot-#{@plot1.id}" do 
+      expect(page).to_not have_content(@plant1.name)
+    end
+    within "#plot-#{@plot2.id}" do 
+      expect(page).to have_content(@plant1.name)
+    end
+  end
 end
