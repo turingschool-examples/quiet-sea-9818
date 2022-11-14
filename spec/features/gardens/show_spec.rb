@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Plots Index Page' do 
+RSpec.describe 'garden show page' do 
   before :each do 
     @garden1 = Garden.create!(name: 'Fungi Utopia', organic: true)
     @garden2 = Garden.create!(name: 'No Fun', organic: true)
@@ -15,31 +15,12 @@ RSpec.describe 'Plots Index Page' do
     @plant5 = @plot2.plants.create!(name: "Nightshade", description: "Makes you sleep", days_to_harvest: 65)
     @plant6 = @plot2.plants.create!(name: "No Dust Left Behind", description: "for to-do lists", days_to_harvest: 70)
     
-    visit "/plots"
+    visit "/gardens/:id"
   end
 
-  describe 'when i visit plot index page' do 
-    it 'I see a list of all plot numbers' do 
-      expect(page).to have_content(@plot1.number)
-      expect(page).to have_content(@plot2.number)
-      # save_and_open_page
-    end
-
-    it 'And under each plot number I see the names of all that plots plants' do
+  describe 'when I visit a gardens show page' do 
+    it 'see a list of plants that are included in that gardens plots' do 
       expect(page).to have_content(@plant1.name)
-      expect(page).to have_content(@plant2.name)
-      expect(page).to have_content(@plant3.name)
-      expect(page).to have_content(@plant4.name)
-      expect(page).to have_content(@plant5.name)
-      expect(page).to have_content(@plant6.name)
     end
-
-    it 'i see a link to remove that plant from the plot' do 
-      expect(page).to have_link("Delete #{@plant1.name}")
-
-      click_link "Delete #{@plant1.name}"
-      expect(current_path).to eq("/plots")
-      expect(page).to_not have_content(@plant1.name)
-    end
-  end 
-end
+  end
+end 
