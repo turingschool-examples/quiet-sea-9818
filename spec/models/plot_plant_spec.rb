@@ -20,7 +20,7 @@ RSpec.describe PlotPlant do
 
   describe 'model methods' do
     describe '#plant_name' do
-      it 'can return the name of a plot plant' do
+      it 'returns the name of a plot plant' do
         expect(@plotplant1.plant_name).to eq(@potato.name)
         expect(@plotplant2.plant_name).to eq(@kale.name)
         expect(@plotplant3.plant_name).to eq(@pepper.name)

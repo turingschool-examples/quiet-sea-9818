@@ -1,0 +1,7 @@
+<h1><%= @garden.name %>'s Page</h1>
+
+<ul>
+  <% @garden.unique_under_100_harvest.each do |plant| %>
+    <li><%= plant.name %>
+  <% end %>
+</ul>
