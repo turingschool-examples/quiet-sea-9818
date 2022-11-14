@@ -30,13 +30,11 @@ RSpec.describe("Garden Show Page") do
       end
 
       it 'the list is sorted by total times that plant is found in the garden (regardless of plot)' do
-        within "#garden-plant-list" do
-          4.times { @plot_2.plants << @plant_4 }
-          visit garden_path(@garden_1)
+        4.times { @plot_2.plants << @plant_4 }
+        visit garden_path(@garden_1)
 
-          expect(@plant_4.name).to appear_before(@plant_2.name)
-          expect(@plant_2.name).to appear_before(@plant_3.name)
-        end
+        expect(@plant_4.name).to appear_before(@plant_2.name)
+        expect(@plant_2.name).to appear_before(@plant_3.name)
       end
     end
   end

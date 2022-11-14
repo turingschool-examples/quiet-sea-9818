@@ -15,9 +15,10 @@ RSpec.describe Garden do
     @plant_3 = @plot_2.plants.create(name: 'plant3', description: 'also here', days_to_harvest: 1)
   end
   describe 'instance methods' do
-    describe '#plants_names' do
-      it 'returns distinct list of names for the plants in that garden with under 100 days to harvest' do
-        expect(@garden_1.plants_names).to eq([@plant_2.name, @plant_3.name])
+    describe '#garden_plants' do
+      it 'returns distinct list of plants in that garden with under 100 days to harvest' do
+        expect(@garden_1.garden_plants[0].name).to eq(@plant_2.name)
+        expect(@garden_1.garden_plants[1].name).to eq(@plant_3.name)
       end
     end
   end
