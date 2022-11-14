@@ -20,7 +20,7 @@ RSpec.describe 'Plot Index' do
   describe 'As a visitor' do
     it "I see a list of all plot numbers And under each plot number I see the
     names of all that plot's plants" do
-      save_and_open_page
+      
       within("#plot-#{@plot1.number}") do
         expect(page).to have_content(@plot1.number)
         expect(page).to have_content(@tomato.name)
@@ -33,15 +33,21 @@ RSpec.describe 'Plot Index' do
       end
     end
     
-    xit "I see a link to remove that plant from that plot When I click on that
+    it "I see a link to remove that plant from that plot When I click on that
     link I'm returned to the plots index page And I no longer see that plant
     listed under that plot, And I still see that plant's name under other plots
     that it was associated with." do
-      expect(page).to have_link("Delete #{@tomato.name}")
+    # save_and_open_page
+      within("#plot-#{@plot1.number}") do
+        expect(page).to have_link("Delete #{@tomato.name}")
+        click_link "Delete #{@tomato.name}"
+      end
       
-      click_link "Delete #{@tomato.name}"
       expect(current_path).to eq('/plots')
-      expect(page).to_not have_content(@tomato.name)
+      
+      within("#plot-#{@plot1.number}") do
+        expect(page).to_not have_content(@tomato.name)
+      end
     end
   end
 end

@@ -7,11 +7,11 @@
       <li>Plot: <%= plot.number %> --- Plants: </li>
       <ol>
         <% plot.plants.each do |plant| %>
-        <li> <%= plant.name %> </li>
+        <li> <%= plant.name %> <%= link_to "Delete #{plant.name}", "/plots/#{plot.id}/plot_plants/#{plant.id}", method: :delete %> </li>
         <% end %>
       </ol>
+    </div>
       <% end %>
       
-    </div>
   </ul>
 </div>
