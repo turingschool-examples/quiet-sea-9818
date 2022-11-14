@@ -3,12 +3,15 @@
 <div id="plots-plants">
   <ul>
     <% @plots.each do |plot| %>
+    <div id=<%="plot-#{plot.number}" %> >
       <li>Plot: <%= plot.number %> --- Plants: </li>
       <ol>
         <% plot.plants.each do |plant| %>
-          <li> <%= plant.name %> </li>
+        <li> <%= plant.name %> </li>
         <% end %>
       </ol>
-    <% end %>
+      <% end %>
+      
+    </div>
   </ul>
 </div>
