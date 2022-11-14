@@ -1,12 +1,12 @@
+# User Story 3, Garden's Plants
+# As a visitor
+# When I visit a garden's show page
+# Then I see a list of plants that are included in that garden's plots
+# And I see that this list is unique (no duplicate plants)
+# And I see that this list only includes plants that take less than 100 days to harvest
 require 'rails_helper'
 
-RSpec.describe Garden do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plants).through(:plots)}
-    it { should have_many(:plot_plants).through(:plants) }
-  end
-
+RSpec.describe "Garden Show Page" do
   before :each do
     @garden = Garden.create!(name: "Turing Community Garden", organic: true)
     @plot1 = Plot.create!(number: 25, size: "Large", direction: "East", garden: @garden)
@@ -22,16 +22,13 @@ RSpec.describe Garden do
     @pp5 = PlotPlant.create!(plot: @plot1, plant: @plant4)
   end
 
-  describe "Instance Methods" do
-    describe "#all_plants" do
-      it "returns a unique list plant names within the garden across all garden plots" do
-        expect(@garden.all_plants).to eq("Plant1, Plant2, Plant3, Plant4")
-      end
-    end
-
-    describe "#fast_harvest_plants" do
-      it "returns a list of plants that take less than 100 days to harvest" do
-        expect(@garden.fast_harvest_plants).to eq("Plant1, Plant2, Plant3")
+  describe "As a visitor" do
+    describe "When I visit a garden's show page" do
+      it "Then I see a UNIQUE list of plants that are included in that garden's plots that take less than 100 days to harvest" do
+        visit "/gardens/#{@garden.id}"
+        # save_and_open_page
+        expect(page).to have_content("Turing Community Garden")
+        expect(page).to have_content("Plants: Plant1, Plant2, Plant3")
       end
     end
   end

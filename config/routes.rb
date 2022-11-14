@@ -5,4 +5,6 @@ Rails.application.routes.draw do
     resources :plants, only: [:index]
     resources :plot_plants, only: [:destroy]
   end
+
+  get '/gardens/:id', to: 'gardens#show'
 end
