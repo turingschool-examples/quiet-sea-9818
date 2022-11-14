@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Garden do
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plants) }
-  end
-  
+RSpec.describe 'the garden index' do 
   before(:each) do 
     @garden1 = Garden.create!(name: 'Elitch Gardens', organic: false)
     @garden2 = Garden.create!(name: 'La Alma Community Garden', organic: true)
@@ -22,15 +17,17 @@ RSpec.describe Garden do
 
     @plot1.plants << @plant1 << @plant2
     @plot2.plants << @plant2 << @plant3 << @plant4
-    @plot3.plants << @plant5 << @plant3
+    @plot3.plants << @plant5
+
+    visit garden_path(@garden1)
   end
 
-  describe 'instance methods' do 
-    describe '#plants_under_100_days' do 
-      it 'returns unique plants in garden that harvest in less than 100 days' do 
-        expect(@garden1.plants_under_100_days).to eq([@plant2, @plant3, @plant4])
-        expect(@garden2.plants_under_100_days).to eq([@plant3, @plant5])
-      end
-    end
+  it 'shows all plants being grown in this garden with under 100 days to harvest' do 
+    expect(page).to have_content(@plant2.name, count: 1)
+    expect(page).to have_content(@plant3.name, count: 1)
+    expect(page).to have_content(@plant4.name, count: 1)
+
+    expect(page).to_not have_content(@plant1.name)
+    expect(page).to_not have_content(@plant5.name)
   end
 end
