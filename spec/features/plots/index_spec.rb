@@ -28,6 +28,7 @@ RSpec.describe 'plots index page', type: :feature do
       end
 
       it '- shows a list of all plot numbers, and under each plot lists all of that plots plants' do
+        save_and_open_page
         expect(page).to have_css("#plot-#{@plot_1.id}")
         expect(page).to have_css("#plot-#{@plot_2.id}")
         expect(page).to have_css("#plot-#{@plot_3.id}")
