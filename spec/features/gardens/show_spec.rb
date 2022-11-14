@@ -26,7 +26,7 @@ RSpec.describe "Garden Show Page" do
     describe "When I visit a garden's show page" do
       it "Then I see a UNIQUE list of plants that are included in that garden's plots that take less than 100 days to harvest" do
         visit "/gardens/#{@garden.id}"
-        # save_and_open_page
+        #  save_and_open_page
         expect(page).to have_content("Turing Community Garden")
         expect(page).to have_content("Plants: Plant1, Plant2, Plant3")
       end
