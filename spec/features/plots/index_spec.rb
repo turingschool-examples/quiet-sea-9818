@@ -13,6 +13,7 @@ RSpec.describe 'the plots index page' do
     @plant3 = Plant.create!(name: "Napa Cabbage", description: "Requires loosened soil.", days_to_harvest: 70)
     @plant4 = Plant.create!(name: "Nuclear", description: "Radioactive, produces energy.", days_to_harvest: 600)
     @plant5 = Plant.create!(name: "Cactus", description: "Spiky.", days_to_harvest: 90)
+    @plant6 = Plant.create!(name: "Test", description: "Test.", days_to_harvest: 900)
 
     PlotPlant.create!(plot: @plot1, plant: @plant1)
     PlotPlant.create!(plot: @plot2, plant: @plant2)
@@ -42,6 +43,7 @@ RSpec.describe 'the plots index page' do
       expect(page).to have_content("Plot ##{@plot4.number}")
       expect(page).to have_content(@plant4.name)
     end
+    expect(page).to_not have_content(@plant6.name)
   end
   it "has a link next to each plant to remove that plant from the plot" do
     visit plots_path
