@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.feature "Plots Index Page", type: :feature do
   before :each do
-    @plot_1 = Plot.create!(number: 1, size: 'Large', direction: 'East')
-    @plot_2 = Plot.create!(number: 14, size: 'Small', direction: 'South')
-    @plot_3 = Plot.create!(number: 21, size: 'Medium', direction: 'West')
+    @garden = Garden.create!(name: 'Salad Garden', organic: true)
+    @plot_1 = @garden.plots.create!(number: 1, size: 'Large', direction: 'East')
+    @plot_2 = @garden.plots.create!(number: 14, size: 'Small', direction: 'South')
+    @plot_3 = @garden.plots.create!(number: 21, size: 'Medium', direction: 'West')
 
     @plant_1 = @plot_1.plants.create!(name: 'Cherry Tomato', description: 'Bears small, sweet tomatoes.', days_to_harvest: 90)
     @plant_2 = @plot_1.plants.create!(name: 'Green Bell Pepper', description: 'Medium sized bell peppers.', days_to_harvest: 120)
