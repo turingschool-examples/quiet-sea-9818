@@ -15,6 +15,7 @@ RSpec.describe 'Garden Show Page', type: :feature do
   let!(:lavender) {Plant.create!(name: 'Lavendar', description: 'smells delicious', days_to_harvest: 75)}
   let!(:lily) {Plant.create!(name: 'Lily', description: 'i am pretty', days_to_harvest: 30)}
   let!(:venus) {Plant.create!(name: 'Venus Flytrap', description: 'eats your bugs', days_to_harvest: 150)}
+  let!(:cactus) {Plant.create!(name: 'Cactus', description: 'i poke', days_to_harvest: 100)}
 
   describe 'garden#show' do
     it 'I see a unique list of all plants that are included in the gardens plots' do
@@ -43,6 +44,7 @@ RSpec.describe 'Garden Show Page', type: :feature do
       PlantPlot.create!(plant: rose, plot: plot_3)
       PlantPlot.create!(plant: daisy, plot: plot_3)
       PlantPlot.create!(plant: venus, plot: plot_3)
+      PlantPlot.create!(plant: cactus, plot: plot_3)
 
       visit garden_path(garden_1)
 
@@ -50,7 +52,9 @@ RSpec.describe 'Garden Show Page', type: :feature do
         expect(page).to have_content(daisy.name, count: 1)
         expect(page).to have_content(rose.name, count: 1)
         expect(page).to have_content(lavender.name, count: 1)
+
         expect(page).to_not have_content(venus.name)
+        expect(page).to_not have_content(cactus.name)
       end
     end
 
