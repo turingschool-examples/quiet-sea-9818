@@ -51,12 +51,15 @@ RSpec.describe 'gardens show page' do
       expect("Lily").to appear_before("Purple")
       expect("Venus").to_not appear_before("Lily")
       expect(page).to_not have_content("Tree")
+      expect("Lily").to_not appear_before("Lily")
+
 
 
       visit garden_path(@weeds)
       expect("Dill").to appear_before("Flower")
       expect("Flower").to_not appear_before("Dill")
       expect(page).to_not have_content("Tree")
+      expect("Dill").to_not appear_before("Dill")
 
     end
   end

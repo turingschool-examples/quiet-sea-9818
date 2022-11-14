@@ -34,11 +34,11 @@ RSpec.describe Garden do
 
   describe 'model methods' do 
     it 'returns list of unique plants in a garden for plants that take less than 100 days' do 
-      expect(@secret_garden.plant_list).to eq([@lily.name, @purple.name, @venus_flytrap.name])
-      expect(@secret_garden.plant_list).to_not eq([@tree.name])
+      expect(@secret_garden.plant_order.pluck(:name)).to eq([@lily.name, @purple.name, @venus_flytrap.name])
+      expect(@secret_garden.plant_order.pluck(:name)).to_not eq([@tree.name])
 
-      expect(@weeds.plant_list).to eq([@dill.name])
-      expect(@weeds.plant_list).to_not eq([@lily.name, @purple.name, @venus_flytrap.name])
+      expect(@weeds.plant_order.pluck(:name)).to eq([@dill.name])
+      expect(@weeds.plant_order.pluck(:name)).to_not eq([@lily.name, @purple.name, @venus_flytrap.name])
 
     end
 
