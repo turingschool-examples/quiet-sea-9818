@@ -6,7 +6,10 @@
     <h2>Plot Number: <%= plot.number %></h2>
     <h3>Plants:</h3>
     <% plot.plants.each do |plant| %>
-      <p>- <%= plant.name %></p>
+      <div id="plant-<%= plant.id %>">
+        <%= plant.name %>
+        <%= button_to "Remove Plant", garden_plot_plant_path(@garden, plot, plant), form: {style: 'display:inline-block;'}, method: :delete %>
+      </div>
     <% end %>
   </div>
 <% end %>
