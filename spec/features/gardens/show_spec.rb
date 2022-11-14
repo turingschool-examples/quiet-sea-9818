@@ -37,8 +37,10 @@ RSpec.describe 'gardens show page' do
       expect(page).to have_content("Dill")
       expect(page).to_not have_content("Tree")
       expect(page).to_not have_content("Lily Purple Beauty Sweet Bell Pepper Venus Flytrap")
+    end
 
-
+    it 'plant list is sorted by number of plants that appear in any of that gardens plots descending' do 
+      
     end
   end
 
