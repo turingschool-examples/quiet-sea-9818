@@ -5,7 +5,7 @@ class PlantPlotsController < ApplicationController
     plant = Plant.find(params[:id])
     association = PlantPlot.find_by(plant: plant, plot: plot)
     
-    association.delete 
+    association.destroy 
 
     redirect_to garden_plots_path(garden)
   end
