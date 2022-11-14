@@ -7,7 +7,7 @@ class Garden < ApplicationRecord
 
   def list_garden_plants
     plants
-    .where('days_to_harvest < 100')
-    .distinct
+      .where('days_to_harvest < 100')
+      .distinct
   end
 end
