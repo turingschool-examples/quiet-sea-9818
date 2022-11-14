@@ -1,4 +1,4 @@
-class PlantPlotsController < ApplicationController
+class PlantPlotsController < ApplicationController  
   def destroy 
     garden = Garden.find(params[:garden_id])
     plot = Plot.find(params[:plot_id])
