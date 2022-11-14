@@ -5,6 +5,7 @@
       <p>Plot Number:<%= plot.number %></p>
         <% plot.plants.map do|plant| %>
           <p>Plot Plants:<%= plant.name %></p>
+          <%= link_to "Remove #{plant.name} from Plot",plot_plant_path(plant.id), method:"delete" %>
         <% end %>
   </div>
 
