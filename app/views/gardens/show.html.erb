@@ -1,1 +1,4 @@
-<%@garden.plants%>
+<h1>Page for <%=@garden.name%></h1>
+<h3>Plants That Harvest in Under 100 Days: <%@garden.plant_list.each do |plant|%></h3>
+  <%=plant%>
+<%end%>
