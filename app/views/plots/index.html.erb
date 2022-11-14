@@ -6,8 +6,8 @@
   <%plot.plants.each do |plant| %>
 
     <div id="plant-list-<%= plant.id%>">
-    <ul><%=plant.name%> <%= link_to 'Delete This Plant', plot_plot_plant_path(plot, plant), method: :delete %></ul>
+      <ul><%=plant.name%> <%= link_to 'Delete This Plant', plot_plot_plant_path(plot, plant), method: :delete %></ul>
+     </div>
   <%end%>
 
-  </div>
 <%end%>

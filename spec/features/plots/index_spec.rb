@@ -54,6 +54,7 @@ RSpec.describe "Plot Index page ('/plots')" do
             expect(page).to have_content('Delete This Plant')
          end
     
+         save_and_open_page
          within("#plant-list-#{@zooplant.id}") do
           click_link ('Delete This Plant')
         end
