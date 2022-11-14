@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :plots, except: [:update] do
     resources :plants, except: [:update]
   end
+
+  resources :gardens, except: [:update] 
 end
