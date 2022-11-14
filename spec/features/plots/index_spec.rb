@@ -80,9 +80,32 @@ RSpec.describe 'plots index page', type: :feature do
         end
       end
 
-      xit '- when I click on that link, I am redirected back to the plots index and I no longer see
+      it '- when I click on that link, I am redirected back to the plots index and I no longer see
       that plant listed under that plot, and I still see that plants name under other plots' do
+        within "#plants-#{@plot_1.id}" do
+          click_link "Remove Summer Strawberries"
+        end
 
+        expect(current_path).to eq(plots_path)
+
+        within "#plot-#{@plot_1.id}" do
+          expect(page).to have_content("Plants in Plot #1:")
+          expect(page).to have_content("Plum Tree")
+          expect(page).to_not have_content("Summer Strawberries")
+        end
+
+        within "#plot-#{@plot_2.id}" do
+          expect(page).to have_content("Plants in Plot #2:")
+          expect(page).to have_content("Dino Kale")
+          expect(page).to have_content("Summer Strawberries")
+          expect(page).to have_content("Green Bell Peppers")
+        end
+
+        within "#plot-#{@plot_3.id}" do
+          expect(page).to have_content("Plants in Plot #3:")
+          expect(page).to have_content("San Juan Banana Tree")
+          expect(page).to have_content("Summer Strawberries")
+        end
       end
     end
   end
