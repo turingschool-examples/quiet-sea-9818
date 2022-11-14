@@ -35,5 +35,10 @@ RSpec.describe Garden, type: :model do
       expect(garden1.short_harvest_plants).to eq([plant1, plant2, plant5])
       expect(garden2.short_harvest_plants).to eq([plant3])
     end
+
+    it 'can return all plants sorted from most to least' do
+      expect(garden1.all_plants).to eq([plant1, plant2, plant4, plant5])
+      expect(garden2.all_plants).to eq([plant3])
+    end
   end
 end

@@ -42,5 +42,18 @@ RSpec.describe 'garden show page' do
         expect(page).to_not have_content("#{plant4.name}")
       end
     end
+
+    it 'has a list of plants sorted by number of plants in all that gardens plots from most to least' do
+      within '#all_plants' do
+        expect(plant1.name).to appear_before(plant2.name)
+        expect(plant2.name).to appear_before(plant4.name)
+        expect(plant4.name).to appear_before(plant5.name)
+        expect(page).to_not have_content(plant3.name)
+        expect(page).to have_content("#{plant1.name} - Plant count: #{garden1.all_plants[0].plant_count}")
+        expect(page).to have_content("#{plant2.name} - Plant count: #{garden1.all_plants[1].plant_count}")
+        expect(page).to have_content("#{plant4.name} - Plant count: #{garden1.all_plants[2].plant_count}")
+        expect(page).to have_content("#{plant5.name} - Plant count: #{garden1.all_plants[3].plant_count}")
+      end
+    end
   end
 end

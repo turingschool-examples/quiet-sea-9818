@@ -1,8 +1,17 @@
 <h2><%= @garden.name %></h2>
 <div id='garden_plants'>
+<b>Short Harvest Plants</b>
     <ul>
         <% @garden.short_harvest_plants.each do |plant| %>
             <li><b><%= plant.name %></b> - Days to harvest: <%= plant.days_to_harvest %></li>
         <% end %>
     </ul>
+</div>
+<div id='all_plants'>
+<b>All Plants</b>
+    <ol>
+        <% @garden.all_plants.each do |plant| %>
+            <li><b><%= plant.name %></b> - Plant count: <%= plant.plant_count %></b>
+        <% end %>
+    </ol>
 </div>

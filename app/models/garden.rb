@@ -7,4 +7,11 @@ class Garden < ApplicationRecord
       .where('days_to_harvest < ?', 100)
       .distinct
   end
+
+  def all_plants
+    plants
+      .select('plants.*, count(plants) AS plant_count')
+      .group(:id)
+      .order(plant_count: :desc)
+  end
 end
