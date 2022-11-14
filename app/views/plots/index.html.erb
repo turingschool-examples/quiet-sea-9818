@@ -1,14 +1,14 @@
 <h1>The Plots Index Page</h1>
 <br>
 <br>
-<% @garden.plots.each do |plot| %>
+<% @plots.each do |plot| %>
   <div id="plot-<%= plot.id %>">
     <h2>Plot Number: <%= plot.number %></h2>
     <h3>Plants:</h3>
     <% plot.plants.each do |plant| %>
       <div id="plant-<%= plant.id %>">
         <%= plant.name %>
-        <%= button_to "Remove Plant", garden_plot_plant_path(@garden, plot, plant), form: {style: 'display:inline-block;'}, method: :delete %>
+        <%= button_to "Remove Plant", plot_plant_path(plot, plant), form: {style: 'display:inline-block;'}, method: :delete %>
       </div>
     <% end %>
   </div>

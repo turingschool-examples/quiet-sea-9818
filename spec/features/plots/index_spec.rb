@@ -17,12 +17,12 @@ RSpec.describe "the Plots Index page" do
     PlantPlot.create!(plant: @hibiscus, plot: @plot_2)
 
     other_garden = Garden.create!(name: "Whittier Garden", organic: true)
-    plot_3 = other_garden.plots.create!(number: 3, size: "Small", direction: "North")
+    @plot_3 = other_garden.plots.create!(number: 3, size: "Small", direction: "North")
   end
 
-  describe "As a visitor when I visit /plots" do 
+  describe "As a visitor when I visit the plots index" do 
     it "displays a list of all the plot numbers, and all that plots' plants" do 
-      visit garden_plots_path(@garden)
+      visit plots_path
 
       within "#plot-#{@plot_1.id}" do 
         expect(page).to have_content("Plot Number: 1")
@@ -37,11 +37,13 @@ RSpec.describe "the Plots Index page" do
         expect(page).to have_content("Hibiscus")
       end
 
-      expect(page).to_not have_content("Plot Number: 3")
+      within "#plot-#{@plot_3.id}" do 
+        expect(page).to have_content("Plot Number: 3")
+      end
     end
 
     it "has a link to remove each plant, when clicked i'm redirected to the index page and the plant has been deleted from that plot only" do 
-      visit garden_plots_path(@garden)
+      visit plots_path
 
       within "#plot-#{@plot_1.id}" do 
         within "#plant-#{@hibiscus.id}" do 
@@ -66,7 +68,7 @@ RSpec.describe "the Plots Index page" do
         end
       end
 
-      expect(current_path).to eq(garden_plots_path(@garden))
+      expect(current_path).to eq(plots_path)
 
       within "#plot-#{@plot_1.id}" do 
         expect(page).to have_content("Hibiscus") 
