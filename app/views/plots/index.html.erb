@@ -5,6 +5,7 @@
     <strong><p>Plot #<%= plot.number %></p></strong>
     <p>Plants: <% plot.plants.each do |plant| %><p>
       <li><%= plant.name %></li>
+      <%= link_to "Remove #{plant.name}", plot_plant_path(plot, plant), method: :delete %>
     <% end %>
   </div>
 <% end %>
