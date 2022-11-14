@@ -16,6 +16,7 @@ RSpec.describe 'Garden Show' do
     
     @plot1.plants << @tomato
     @plot1.plants << @zucchini
+    @plot2.plants << @zucchini
     @plot2.plants << @squash
     @plot2.plants << @tomato
     @secret_garden_plot.plants << @squash
@@ -32,6 +33,12 @@ RSpec.describe 'Garden Show' do
         expect(page).to have_content(@squash.name)
         expect(page).to_not have_content(@tomato.name)
         expect(page).to_not have_content(@potatoes.name)
+      end
+    end
+    it "I see the list of plants is sorted by the number of plants that appear
+    in any of that garden's plots from most to least" do
+      within("#garden-plants") do
+        expect(@zucchini.name).to appear_before(@squash.name)
       end
     end
   end

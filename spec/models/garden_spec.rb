@@ -31,7 +31,7 @@ RSpec.describe Garden do
     describe '#unique_plants_under_100' do
       it "returns a list of unique plants where the days_to_harvest is less
       than 100" do
-        expect(@eden.unique_plants_under_100).to eq([@zucchini, @squash])
+        expect(@eden.unique_plants_under_100).to eq([@squash, @zucchini])
       end
     end
   end
