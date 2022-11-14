@@ -13,6 +13,7 @@ RSpec.describe 'plots index page' do
     @lily = @plot1.plants.create!(name: "Lily", description: "Very pretty.", days_to_harvest: 60)
     @tree = @plot1.plants.create!(name: "Tree", description: "Not very pretty.", days_to_harvest: 50)
     @lily = @plot2.plants.create!(name: "Lily", description: "Very pretty.", days_to_harvest: 60)
+    @tree = @plot2.plants.create!(name: "Tree", description: "Not very pretty.", days_to_harvest: 150)
     @tree = @plot3.plants.create!(name: "Tree", description: "Not very pretty.", days_to_harvest: 50)
     @venus_flytrap = @plot3.plants.create!(name: "Venus Flytrap", description: "Very Ugly", days_to_harvest: 50)
 
@@ -35,7 +36,7 @@ RSpec.describe 'plots index page' do
         expect(page).to_not have_content("Plot Number: 25")
         expect(page).to have_content("Plants in Plot #{@plot2.number}:") 
         expect(page).to have_content("Lily")
-        expect(page).to_not have_content("Tree")
+        expect(page).to have_content("Tree")
       end
     end
 
@@ -44,13 +45,23 @@ RSpec.describe 'plots index page' do
       within "#plot-#{@plot1.id}" do 
         expect(page).to have_button("Lily")
         expect(page).to have_content("Tree")
-        # save_and_open_page
 
-        click_button "Lily"
+        click_button "Delete Lily"
         expect(current_path).to eq(plots_path)
         expect(page).to_not have_content("Lily")
         expect(page).to have_content("Tree")
 
+      end
+
+      within "#plot-#{@plot2.id}" do 
+        expect(page).to have_content("Lily")
+        expect(page).to have_content("Tree")
+        # save_and_open_page
+
+        click_button "Delete Tree"
+        expect(current_path).to eq(plots_path)
+        expect(page).to have_content("Lily")
+        expect(page).to_not have_content("Tree")
       end
 
     end
