@@ -37,7 +37,6 @@ RSpec.describe 'Plot Index' do
     link I'm returned to the plots index page And I no longer see that plant
     listed under that plot, And I still see that plant's name under other plots
     that it was associated with." do
-    # save_and_open_page
       within("#plot-#{@plot1.number}") do
         expect(page).to have_link("Delete #{@tomato.name}")
         click_link "Delete #{@tomato.name}"
@@ -47,6 +46,10 @@ RSpec.describe 'Plot Index' do
       
       within("#plot-#{@plot1.number}") do
         expect(page).to_not have_content(@tomato.name)
+      end
+      
+      within("#plot-#{@plot2.number}") do
+        expect(page).to have_content(@tomato.name)
       end
     end
   end
