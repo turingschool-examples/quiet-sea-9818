@@ -56,8 +56,6 @@ RSpec.describe 'plots index page' do
       within "#plot-#{@plot2.id}" do 
         expect(page).to have_content("Lily")
         expect(page).to have_content("Tree")
-        # save_and_open_page
-
         click_button "Delete Tree"
         expect(current_path).to eq(plots_path)
         expect(page).to have_content("Lily")
