@@ -37,6 +37,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'orderly'
   gem 'launchy'
   gem 'pry'
   gem 'simplecov'

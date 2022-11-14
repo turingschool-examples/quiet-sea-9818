@@ -5,5 +5,6 @@ class Plant < ApplicationRecord
     def self.harvestable
         where("plants.days_to_harvest < ?","100")
         .joins(:plots)
+        .reorder('days_to_harvest DESC')
     end
 end

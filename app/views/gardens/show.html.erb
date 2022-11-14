@@ -1,5 +1,6 @@
 <h1><%= @garden.name %> Show Page</h1>
-
+<br>
+<h3>Plants in this Garden: </h3>
 <% @plots_and_plants.each do |plant_plot| %>
-    <p><%= plant_plot.name %>
+    <p><%= plant_plot.name %></p>
 <% end %>
