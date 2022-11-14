@@ -8,6 +8,7 @@ RSpec.describe 'Garden Show Page', type: :feature do
   let!(:plot_2) {garden_1.plots.create!(number: 33, size: 'Large', direction: 'East')}
   let!(:plot_3) {garden_1.plots.create!(number: 5, size: 'Extra Small', direction: 'East')}
   let!(:plot_4) {garden_2.plots.create!(number: 10, size: 'Small', direction: 'South')}
+  let!(:plot_5) {garden_1.plots.create!(number: 20, size: 'Medium', direction: 'South')}
 
   let!(:daisy) {Plant.create!(name: 'Daisy', description: 'Prefers rich, well draining soil', days_to_harvest: 90)}
   let!(:rose) {Plant.create!(name: 'Rose', description: 'Prefers rich soil', days_to_harvest: 15)}
@@ -50,6 +51,30 @@ RSpec.describe 'Garden Show Page', type: :feature do
         expect(page).to have_content(rose.name, count: 1)
         expect(page).to have_content(lavender.name, count: 1)
         expect(page).to_not have_content(venus.name)
+      end
+    end
+
+    it 'shows the list of plants sorted by number of plants appearing in any of the gardens plots from most to least' do
+      PlantPlot.create!(plant: daisy, plot: plot_3)
+      PlantPlot.create!(plant: daisy, plot: plot_1)
+      PlantPlot.create!(plant: daisy, plot: plot_2)
+
+      PlantPlot.create!(plant: lavender, plot: plot_1)
+      PlantPlot.create!(plant: lavender, plot: plot_2)
+      PlantPlot.create!(plant: lavender, plot: plot_3)
+      PlantPlot.create!(plant: lavender, plot: plot_5)
+
+      PlantPlot.create!(plant: rose, plot: plot_2)
+      PlantPlot.create!(plant: rose, plot: plot_3)
+
+      PlantPlot.create!(plant: lily, plot: plot_3)
+
+      visit garden_path(garden_1)
+
+      within("#my-plants") do
+        expect("#{lavender.name}").to appear_before("#{daisy.name}")
+        expect("#{daisy.name}").to appear_before("#{rose.name}")
+        expect("#{rose.name}").to appear_before("#{lily.name}")
       end
     end
   end
