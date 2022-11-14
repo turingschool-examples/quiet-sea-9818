@@ -43,10 +43,11 @@ RSpec.describe 'plots index page' do
       visit plots_path
       within "#plot-#{@plot1.id}" do 
         expect(page).to have_link("Lily")
+        expect(page).to have_content("Tree")
         click_link "Lily"
         expect(current_path).to eq(plots_path)
         expect(page).to_not have_content("Lily")
-
+        expect(page).to have_content("Tree")
       end
 
     end
