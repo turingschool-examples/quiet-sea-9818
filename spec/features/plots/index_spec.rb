@@ -57,4 +57,23 @@ RSpec.describe 'the plots index page' do
       expect(page).to_not have_content(@kale.name)
     end
   end
+
+  it 'has a link next to each plant name to remove plant from plot' do
+    within "#plot_plants_#{@plot1.id}" do
+      expect(page).to have_link("Remove")
+    end
+    
+    within "#plot_plants_#{@plot2.id}" do
+      expect(page).to have_link("Remove")
+    end
+
+    within "#plot_plants_#{@plot3.id}" do
+      expect(page).to have_link("Remove")
+    end
+
+    within "#plot_plants_#{@plot4.id}" do
+      expect(page).to have_link("Remove")
+    end
+    save_and_open_page
+  end
 end
