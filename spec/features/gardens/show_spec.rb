@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Garden do
+RSpec.describe 'Gardens' do
   before(:each) do
     @garden1 = Garden.create!(name: 'Turing Community Garden', organic: true)
 
@@ -22,17 +22,12 @@ RSpec.describe Garden do
     @plot2.plants << @shared_plant
   end
 
-  describe 'relationships' do
-    it { should have_many(:plots) }
-    it { should have_many(:plant_plots).through(:plots) }
-    it { should have_many(:plants).through(:plant_plots) }
-  end
-
-  describe 'instance methods' do
-    describe '#unique_plants' do
-      it 'only returns unique plants' do
-        expect(@garden1.unique_plants.count).to eq(4)
-      end
+  describe '#show' do
+    it 'has a list of plants in the garden plots' do
+      visit "/gardens/#{@garden1.id}"
+      expect(page).to have_content("shared plant")
+      expect(page).not_to have_content("Green Beans")
     end
+
   end
 end

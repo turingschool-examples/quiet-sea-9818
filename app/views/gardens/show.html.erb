@@ -1,0 +1,7 @@
+<h1>@<%= @garden.name %> plants (no duplicates :)</h1>
+
+<ul>
+<% @garden.unique_plants.each do |plant| %>
+<li><%= plant.name %></li>
+<% end %>
+</ul>
