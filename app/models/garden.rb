@@ -10,6 +10,6 @@ class Garden < ApplicationRecord
     plants.where('days_to_harvest < ?', '100')
     .select('plants.name as name, plants.count as count')
     .group(:name)
-    .order("count('name') desc")
+    .order(Arel.sql("count('plants.name') desc"))
   end
 end

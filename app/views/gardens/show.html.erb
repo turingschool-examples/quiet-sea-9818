@@ -1,4 +1,7 @@
 <h1>Page for <%=@garden.name%></h1>
-<h3>Plants That Harvest in Under 100 Days: <%@garden.plant_list.each do |plant|%></h3>
-  <%=plant%>
+<h3>Plants That Harvest in Under 100 Days: 
+<h5>Ordered by number of plants in any of garden's plots from most to least: </h5>
+<%@garden.plant_order.each do |plant|%></h3>
+  <p><strong><%=plant.name%></strong></p>
+  <p> - <%=plant.count%> in this garden.</p>
 <%end%>
