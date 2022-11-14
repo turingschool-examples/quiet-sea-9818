@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Plant do
-  describe 'Relationships' do
-    it { should have_many(:plot_plants) }
-    it { should have_many(:plots).through(:plot_plants) }
-  end
+RSpec.describe 'Garden Show' do
   before :each do
     @garden1 = Garden.create!(name: 'Backyard Garden', organic: true)
 
@@ -27,10 +23,22 @@ RSpec.describe Plant do
     PlotPlant.create!(plot_id: @plot1.id, plant_id: @plant4.id)
     PlotPlant.create!(plot_id: @plot2.id, plant_id: @plant5.id)
     PlotPlant.create!(plot_id: @plot3.id, plant_id: @plant6.id)
-  end 
-  describe 'harvestable' do
-    it 'joins plants and plots and filters out plants with over 100 days to harvest' do
-      expect(Plant.harvestable).to eq([@plant1, @plant2, @plant3])
+  end
+  describe 'Show' do
+    it "Then I see a list of plants that are included in that garden's plots
+    And I see that this list is unique (no duplicate plants)
+    And I see that this list only includes plants that take less than 100 days to harvest" do
+
+    visit "/gardens/#{@garden1.id}"
+    save_and_open_page
+    expect(page).to have_content(@plant1.name)
+    expect(page).to have_content(@plant2.name)
+    expect(page).to have_content(@plant3.name)
+
+    expect(page).to_not have_content(@plant4.name)
+    expect(page).to_not have_content(@plant5.name)
+    expect(page).to_not have_content(@plant6.name)
+
     end
   end
 end

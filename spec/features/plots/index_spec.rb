@@ -45,7 +45,6 @@ RSpec.describe 'Plot Index' do
 
     click_on "Delete potato #{@pp1.id}"
 
-    save_and_open_page
     expect(page).to_not have_content("Delete potato #{@pp1.id}")
     expect(page).to have_content("Delete potato #{@pp4.id}")
 

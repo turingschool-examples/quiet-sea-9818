@@ -5,6 +5,8 @@ resources :plots, only: [:index, :show, :destroy]
 
 resources :plants, only: [:index, :show, :destroy]
 
+resources :gardens, only: [:index, :show, :destroy]
+
 resources :plot_plants, only: [:index, :show, :destroy]
 
 
