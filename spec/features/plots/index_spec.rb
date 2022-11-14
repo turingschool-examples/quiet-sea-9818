@@ -4,10 +4,10 @@ RSpec.describe 'the plots index page' do
   before :each do
     @turing = Garden.create!(name: "Turing Community Garden", organic: true)
     @agritopia = Garden.create!(name: "Agritopia Farm", organic: true)
-    @plot1 = @turing.gardens.create!(number: 25, size: "Large", direction: "East")
-    @plot2 = @turing.gardens.create!(number: 87, size: "Small", direction: "West")
-    @plot3 = @agritopia.gardens.create!(number: 9, size: "Very Large", direction: "North")
-    @plot4 = @agritopia.gardens.create!(number: 35, size: "Medium", direction: "West")
+    @plot1 = @turing.plots.create!(number: 25, size: "Large", direction: "East")
+    @plot2 = @turing.plots.create!(number: 87, size: "Small", direction: "West")
+    @plot3 = @agritopia.plots.create!(number: 9, size: "Very Large", direction: "North")
+    @plot4 = @agritopia.plots.create!(number: 35, size: "Medium", direction: "West")
     @pepper = Plant.create!(name: "Bell Pepper", description: "Prefers rich, well draining soil.", days_to_harvest: 90)
     @potato = Plant.create!(name: "Yukon Gold", description: "Needs colder temps", days_to_harvest: 120)
     @squash = Plant.create!(name: "Yellow Squash", description: "Minimal care required", days_to_harvest: 60)
@@ -29,6 +29,34 @@ RSpec.describe 'the plots index page' do
       expect(page).to have_content(@plot2.number)
       expect(page).to have_content(@plot3.number)
       expect(page).to have_content(@plot4.number)
+    end
+  end
+
+  it 'displays all plants names associated with each plot' do
+    within "plot_plants_#{@plot1.id}" do
+      expect(page).to have_content(@potato.name)
+      expect(page).to have_content(@kale.name)
+      expect(page).to_not have_content(@pepper.name)
+    end
+
+    within "plot_plants_#{@plot2.id}" do
+      expect(page).to have_content(@pepper.name)
+      expect(page).to_not have_content(@potato.name)
+      expect(page).to_not have_content(@kale.name)
+    end
+
+    within "plot_plants_#{@plot3.id}" do
+      expect(page).to have_content(@squash.name)
+      expect(page).to have_content(@kale.name)
+      expect(page).to_not have_content(@pepper.name)
+      expect(page).to_not have_content(@tomato.name)
+    end
+
+    within "plot_plants_#{@plot4.id}" do
+      expect(page).to have_content(@pepper.name)
+      expect(page).to have_content(@tomato.name)
+      expect(page).to_not have_content(@squash.name)
+      expect(page).to_not have_content(@kale.name)
     end
   end
 end
