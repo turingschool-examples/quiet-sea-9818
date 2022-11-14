@@ -13,6 +13,7 @@ RSpec.describe Garden do
     @plot1 = @garden1.plots.create!(number: 25, size: 'Large', direction: 'East')
     @plot2 = @garden1.plots.create!(number: 10, size: 'Small', direction: 'West')
     @plot3 = @garden2.plots.create!(number: 10, size: 'Small', direction: 'West')
+    @plot4 = @garden1.plots.create!(number: 10, size: 'Small', direction: 'West')
 
     @plant1 = Plant.create!(name: 'Doom Pepper', description: 'Spicy as hell', days_to_harvest: 140)
     @plant2 = Plant.create!(name: 'Happy Carrots', description: 'They so cute', days_to_harvest: 80)
@@ -30,6 +31,12 @@ RSpec.describe Garden do
       it 'returns unique plants in garden that harvest in less than 100 days' do 
         expect(@garden1.plants_under_100_days).to eq([@plant2, @plant3, @plant4])
         expect(@garden2.plants_under_100_days).to eq([@plant3, @plant5])
+      end
+
+      it 'is ordered by the number of times that plant appears in gardens plots' do 
+        @plant3.plots << @plot1 << @plot4
+
+        expect(@garden1.plants_under_100_days).to eq([@plant3, @plant2, @plant4])
       end
     end
   end

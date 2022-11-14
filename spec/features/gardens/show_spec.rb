@@ -30,4 +30,14 @@ RSpec.describe 'the garden index' do
     expect(page).to_not have_content(@plant1.name)
     expect(page).to_not have_content(@plant5.name)
   end
+
+  it 'orders plants by number of times they appear in gardens plots' do 
+    @plot4 = @garden1.plots.create!(number: 10, size: 'Small', direction: 'West')
+    @plant3.plots << @plot1 << @plot4
+
+    visit garden_path(@garden1)
+
+    expect(@plant3).to appear_before(@plant2)
+    expect(@plant2).to appear_before(@plant4)
+  end
 end
