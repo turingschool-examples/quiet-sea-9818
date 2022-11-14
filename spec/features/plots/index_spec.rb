@@ -12,7 +12,7 @@ RSpec.describe("Plots Index Page") do
     @plot_3 = garden_2.plots.create(number: 3, size: 'large', direction: 'south')
     @plant_3 = @plot_3.plants.create(name: 'plant3', description: 'not here', days_to_harvest: 70)
 
-    visit plots_path(garden_1)
+    visit plots_path
   end
   describe 'When I visit /plots' do
     describe 'Then I see' do
@@ -26,7 +26,6 @@ RSpec.describe("Plots Index Page") do
 
       it 'under each plot number, name of each of that plots plants' do
         within "#plot-number-#{@plot_1.id}" do
-          save_and_open_page
           expect(page).to have_content(@plant_1.name)
           expect(page).to have_content(@plant_2.name)
 
@@ -37,6 +36,31 @@ RSpec.describe("Plots Index Page") do
 
           expect(page).to_not have_content(@plant_1.name)
           expect(page).to_not have_content(@plant_2.name)
+        end
+      end
+
+      it 'next to each plant a link to "Remove" it' do
+        within "#plot-number-#{@plot_1.id}" do
+          expect(page).to have_link("Remove", count: 2)
+        end
+        within "#plot-number-#{@plot_3.id}" do
+          expect(page).to have_link("Remove", count: 1)
+        end
+      end
+    end
+
+    describe 'When I click on "Remove"' do
+      it 'it redirects me to the plots index page' do
+        within "#plot-number-#{@plot_3.id}" do
+          click_link("Remove")
+          expect(current_path).to eq(plots_path)
+        end
+      end
+
+      it 'I no longer see the removed plant under that plot' do
+        within "#plot-number-#{@plot_3.id}" do
+          click_link("Remove")
+          expect(page).to_not have_content(@plant_3.name)
         end
       end
     end
