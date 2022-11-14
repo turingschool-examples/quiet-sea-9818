@@ -1,0 +1,9 @@
+<h3><%= @garden.name %></h3>
+
+<div id="my-plants">
+  <% @plants.less_than_100_days.each do |plant| %>
+  <ul>
+    <li><%= plant.name %></li>
+  </ul>
+  <% end %>
+</div>
