@@ -33,9 +33,3 @@ end
 
 
 
-# User Story 3, Garden's Plants
-# As a visitor
-# When I visit a garden's show page
-# Then I see a list of plants that are included in that garden's plots
-# And I see that this list is unique (no duplicate plants)
-# And I see that this list only includes plants that take less than 100 days to harvest

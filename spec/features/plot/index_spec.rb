@@ -16,11 +16,7 @@ RSpec.describe 'plot index page' do
     @plot_plants2 = PlotPlant.create!(plant_id: @plant2.id, plot_id: @plot2.id)
     @plot_plants3 = PlotPlant.create!(plant_id: @plant3.id, plot_id: @plot2.id)
   end
-#   User Story 1, Plots Index Page
-# As a visitor
-# When I visit the plots index page ('/plots')
-# I see a list of all plot numbers
-# And under each plot number I see the names of all that plot's plants
+
   describe "As a visitor" do
     describe "when I visit plots index page" do
       it "I see a list of all plot numbers" do
@@ -47,16 +43,11 @@ RSpec.describe 'plot index page' do
       it "the link takes me to plots index page" do
         visit plots_path
 
+        click_on("Remove #{@plant1.name}")
+    
         expect(page).to have_current_path(plots_path)
+        expect(page).to_not have_content("#{@plant1.name}")
       end
     end
   end
 end
-# As a visitor
-# When I visit the plots index page
-# Next to each plant's name
-# I see a link to remove that plant from that plot
-# When I click on that link
-# I'm returned to the plots index page
-# And I no longer see that plant listed under that plot,
-# And I still see that plant's name under other plots that it was associated with.
