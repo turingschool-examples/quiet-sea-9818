@@ -70,7 +70,7 @@ RSpec.describe 'Garden Show Page', type: :feature do
       PlantPlot.create!(plant: lily, plot: plot_3)
 
       visit garden_path(garden_1)
-
+      
       within("#my-plants") do
         expect("#{lavender.name}").to appear_before("#{daisy.name}")
         expect("#{daisy.name}").to appear_before("#{rose.name}")

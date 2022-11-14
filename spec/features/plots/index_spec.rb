@@ -51,7 +51,15 @@ RSpec.describe 'Plots Index Page', type: :feature do
 
       visit plots_path
 
-      within ("#plot-#{plot_1.id}") do
+      within ("##{plot_1.id}-#{lavender.id}") do
+        expect(page).to have_link('Delete Plant')
+      end
+
+      within ("##{plot_1.id}-#{rose.id}") do
+        expect(page).to have_link('Delete Plant')
+      end
+
+      within ("##{plot_2.id}-#{daisy.id}") do
         expect(page).to have_link('Delete Plant')
       end
     end

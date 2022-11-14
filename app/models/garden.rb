@@ -8,6 +8,5 @@ class Garden < ApplicationRecord
       .select('plants.*, count(plants.id) AS count')
       .group('plants.id')
       .order('count desc')
-      .distinct
   end
 end
