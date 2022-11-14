@@ -1,7 +1,8 @@
+<h1>Plot Index Page</h1>
 <%@plots.each do |plot|%>
 <div id = "plot-<%=plot.id%>">
-<h2>Plot Number: <%=plot.number%></h2>
-  Plants: <%plot.plants.each do |plant|%>
+<h2><strong>Plot Number: <%=plot.number%></strong></h2>
+  Plants in Plot <%=plot.number%>: <%plot.plants.each do |plant|%>
     <p><%=link_to plant.name, "plots/#{plot.id}/plants/#{plant.id}", method: :delete %></p>
   <%end%>
 </div>  

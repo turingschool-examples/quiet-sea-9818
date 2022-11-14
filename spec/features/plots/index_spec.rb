@@ -23,17 +23,18 @@ RSpec.describe 'plots index page' do
       visit plots_path
       within "#plot-#{@plot1.id}" do 
         expect(page).to have_content("Plot Number: 25")
-        expect(page).to have_content("Plants:") 
+        expect(page).to have_content("Plants in Plot #{@plot1.number}:") 
         expect(page).to have_content("Purple Beauty Sweet Bell Pepper")
         expect(page).to have_content("Lily")
         expect(page).to have_content("Tree")
         expect(page).to_not have_content("Venus Flytrap")
+        save_and_open_page
       end
 
       within "#plot-#{@plot2.id}" do 
         expect(page).to have_content("Plot Number: 10")
         expect(page).to_not have_content("Plot Number: 25")
-        expect(page).to have_content("Plants:") 
+        expect(page).to have_content("Plants in Plot #{@plot2.number}:") 
         expect(page).to have_content("Lily")
         expect(page).to_not have_content("Tree")
       end
